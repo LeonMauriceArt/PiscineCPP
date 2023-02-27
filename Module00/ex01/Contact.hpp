@@ -6,29 +6,32 @@
 #include <string>
 using namespace std;
 
+const int MAX_CONTACTS = 8;
+const int FIELD_SIZE = 10;
+
 class Contact
 {
 public:
+	Contact(void);
+	string getFname(void);
+	string getLname(void);
+	string getNickname(void);
+	string getPhonenum(void);
+	string getSecret(void);
+	void	setFname(string);
+	void	setLname(string);
+	void	setNickname(string);
+	void	setPhonenum(string);
+	void	setSecret(string);
+private:
 	string	fname;
 	string	lname;
 	string	nickname;
-	int		phonenum;
+	string	phonenum;
 	string	secret;
-	void	Create();
 };
 
-void Contact::Create()
-{
-	cout << "Enter first name :\n";
-	cin >> this->fname;
-	cout << "Enter last name :\n";
-	cin >> this->lname;
-	cout << "Enter nickname :\n";
-	cin >> this->nickname;
-	cout << "Enter phone number :\n";
-	cin >> this->phonenum;
-	cout << "Enter secret:\n";
-	cin >> this->secret;
-}
-
+void	displayPhonebook(Contact phonebook[], int nbr_contacts);
+Contact addContact(void);
+string	correctContact(string field);
 #endif

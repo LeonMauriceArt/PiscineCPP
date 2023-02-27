@@ -1,28 +1,40 @@
-#include "phonebook.hpp"
+#include "Contact.hpp"
 using namespace std;
 
-void AddContact(Phonebook MyPhonebook, int i)
+void AddContact(Contact Phonebook[], int i)
 {
-	Contact NewContact;
-	NewContact.Create();
-	MyPhonebook.PhoneContact[i] = NewContact;
+	Phonebook[i] = addContact();
+	cout << "You added " << Phonebook[i].getFname() << " to your phonebook !" << endl;
+	return;
 }
 
 int main(void)
 {
-	Phonebook 	MyPhonebook;
-	int			i = 0;
+	int	i = 0;
+	int	nbr_contacts = 0;
+	Contact	Phonebook[MAX_CONTACTS];
 	cout << "Hello and welcome to Leon's phonebook !\n To add an user, enter ADD.\n To search for and user, enter SEARCH.\n Finally, enter EXIT to quit this phonebook !\n";
 	string input;
-	cin >> input;
+	getline(cin, input);
 	while (input.compare("EXIT") != 0)
 	{
+		if (i == MAX_CONTACTS)
+			i = 0;
 		if(input.compare("ADD") == 0)
-			AddContact(MyPhonebook, i);
+		{
+			AddContact(Phonebook, i);
+			i++;
+			if (nbr_contacts != 8)
+				nbr_contacts++;
+		}
 		if(input.compare("SEARCH") == 0)
-			cout << "search";
-		cin >> input;
+		{
+			if (nbr_contacts == 0)
+				cout << "Your phonebook is empty !" << endl;
+			else
+				displayPhonebook(Phonebook, nbr_contacts);
+		}
+		getline(cin, input);
 	}
-	cout << MyPhonebook.PhoneContact[0].fname;
 	return (0);
 }
