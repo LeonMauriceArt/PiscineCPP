@@ -1,60 +1,59 @@
 #include "Contact.hpp"
 #include <limits>
-#include <cstring>
-using namespace std;
+#include <string>
 
 Contact::Contact(void) {return ;}
 
-string Contact::getFname(void)
+std::string Contact::getFname(void)
 {
 	return (this->fname);
 }
 
-string Contact::getLname(void)
+std::string Contact::getLname(void)
 {
 	return (this->lname);
 }
 
-string Contact::getNickname(void)
+std::string Contact::getNickname(void)
 {
 	return (this->nickname);
 }
 
-string Contact::getPhonenum(void)
+std::string Contact::getPhonenum(void)
 {
 	return (this->phonenum);
 }
 
-string Contact::getSecret(void)
+std::string Contact::getSecret(void)
 {
 	return (this->secret);
 }
 
-void	Contact::setFname(string str)
+void	Contact::setFname(std::string str)
 {
 	this->fname = str;
 	return;
 }
 
-void	Contact::setLname(string str)
+void	Contact::setLname(std::string str)
 {
 	this->lname = str;
 	return;
 }
 
-void	Contact::setNickname(string str)
+void	Contact::setNickname(std::string str)
 {
 	this->nickname = str;
 	return;
 }
 
-void	Contact::setPhonenum(string str)
+void	Contact::setPhonenum(std::string str)
 {
 	this->phonenum = str;
 	return;
 }
 
-void	Contact::setSecret(string str)
+void	Contact::setSecret(std::string str)
 {
 	this->secret = str;
 	return;

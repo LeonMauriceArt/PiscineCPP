@@ -1,17 +1,17 @@
 #include "Contact.hpp"
 
-Contact addContact(void)
+Contact CreateContact(void)
 {
 	Contact newContact;
-	string	buff;
+	std::string	buff;
 
 	while(true)
 	{
-		cout << "Enter first name :" << endl;
-		getline(cin, buff);
+		std::cout << "Enter first name :" << std::endl;
+		getline(std::cin, buff);
 		if(buff.empty())
 		{
-			cout << "Field cannot be empty." << endl;
+			std::cout << "Field cannot be empty." << std::endl;
 			continue;
 		}
 		newContact.setFname(buff);
@@ -19,11 +19,11 @@ Contact addContact(void)
 	}
 	while(true)
 	{
-		cout << "Enter last name :" << endl;
-		getline(cin, buff);
+		std::cout << "Enter last name :" << std::endl;
+		getline(std::cin, buff);
 		if(buff.empty())
 		{
-			cout << "Field cannot be empty." << endl;
+			std::cout << "Field cannot be empty." << std::endl;
 			continue;
 		}
 		newContact.setLname(buff);
@@ -31,11 +31,11 @@ Contact addContact(void)
 	}
 	while(true)
 	{
-		cout << "Enter nickname :" << endl;
-		getline(cin, buff);
+		std::cout << "Enter nickname :" << std::endl;
+		getline(std::cin, buff);
 		if(buff.empty())
 		{
-			cout << "Field cannot be empty." << endl;
+			std::cout << "Field cannot be empty." << std::endl;
 			continue;
 		}
 		newContact.setNickname(buff);
@@ -43,11 +43,11 @@ Contact addContact(void)
 	}
 	while(true)
 	{
-		cout << "Enter phone number :" << endl;
-		getline(cin, buff);
+		std::cout << "Enter phone number :" << std::endl;
+		getline(std::cin, buff);
 		if(buff.empty())
 		{
-			cout << "Field cannot be empty." << endl;
+			std::cout << "Field cannot be empty." << std::endl;
 			continue;
 		}
 		newContact.setPhonenum(buff);
@@ -55,11 +55,11 @@ Contact addContact(void)
 	}
 	while(true)
 	{
-		cout << "Enter darkest secret :" << endl;
-		getline(cin, buff);
+		std::cout << "Enter darkest secret :" << std::endl;
+		getline(std::cin, buff);
 		if(buff.empty())
 		{
-			cout << "Field cannot be empty." << endl;
+			std::cout << "Field cannot be empty." << std::endl;
 			continue;
 		}
 		newContact.setSecret(buff);
@@ -68,7 +68,7 @@ Contact addContact(void)
 	return (newContact);
 }
 
-string	correctContact(string field)
+std::string	correctContact(std::string field)
 {
 	field = field.erase((FIELD_SIZE - 1), field.length() - (FIELD_SIZE - 1));
 	field.append(".");
@@ -77,11 +77,12 @@ string	correctContact(string field)
 
 void	displayPhonebook(Contact phonebook[], int nbr_contacts)
 {
-	cout << "|     index|first name| last name|  nickname|" << endl;
+	std::cout << "|     index|first name| last name|  nickname|" << std::endl;
 	for (int i = 0; i < nbr_contacts; i++)
 	{
-		string firstname = phonebook[i].getFname();
-		firstname = firstname. > FIELD_SIZE ? correctContact(firstname) : firstname;
-		cout << "|" << i << "|" << phonebook[i].getFname() << "|" << endl;
+		std::string firstname = phonebook[i].getFname();
+		if (firstname.length() > FIELD_SIZE)
+			correctContact(firstname);
+		std::cout << "|" << i << "|" << phonebook[i].getFname() << "|" << std::endl;
 	}
 }

@@ -1,15 +1,45 @@
-CC = c++
-CFLAGS = -Wall -Wextra -Werror
+NAME		:= PhoneBook
 
-all: phonebook
+INCLUDES	:= 	Contact.hpp
+
+SRC			:= 	Contact.cpp \
+				PhoneBook.cpp \
+				main.cpp 
+		
+OBJ 		:= 	$(SRC:.c=.o)
+CC 			:= c++
+CFLAGS 		:= -Wall -Wextra -Werror -std=c++98
+
+HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
+MEMFLAGS 	:= 	-fsanitize=address -g3
+
+all: $(NAME)
 	@echo "\033[32mCompilation done !\033[0m"
 
-megaphone: megaphone.cpp
+$(OPATH)/%.o 	: %.c $(HEADER) Makefile
+	@echo "\033[34mCompiling $<...\033[0m"
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+
+phonebook: $(SRC)
 	@echo "\033[34mCompiling $<...\033[0m"	
 	@$(CC) $(CFLAGS) -o $@ $<
 
+
+$(NAME) 		: $(OBJ)
+	@echo "\033[34mCompiling $<...\033[0m"	
+	@$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
+
 clean:
 	@echo "\033[31mCleaning...\033[0m"
-	@rm -f megaphone
+	@rm -f $(NAME)
 
-re: clean all
+fclean 			: clean
+	@echo "\033[31mForce Cleaning...\033[0m"
+	@rm $(NAME) || true
+
+re: fclean all
+
+
+.PHONY 			: clean fclean re
