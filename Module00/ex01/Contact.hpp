@@ -3,34 +3,27 @@
 #define CONTACT_HPP
 
 #include <iostream>
-#include <string>
-
-const int MAX_CONTACTS = 8;
-const int FIELD_SIZE = 10;
+#include <iomanip>
+#include <limits>
 
 class Contact
 {
 public:
 	Contact(void);
-	std::string getFname(void);
-	std::string getLname(void);
-	std::string getNickname(void);
-	std::string getPhonenum(void);
-	std::string getSecret(void);
-	void	setFname(std::string);
-	void	setLname(std::string);
-	void	setNickname(std::string);
-	void	setPhonenum(std::string);
-	void	setSecret(std::string);
+	~Contact(void);
+	void	init(void);
+	void	view(int index) const;
+	void	display(void) const;
+	void	setIndex(int i);
 private:
-	std::string	fname;
-	std::string	lname;
-	std::string	nickname;
-	std::string	phonenum;
-	std::string	secret;
+	std::string	firstName;
+	std::string	lastName;
+	std::string	nickName;
+	std::string	phoneNumber;
+	std::string	darkestSecret;
+	int	index;
+	std::string printLen(std::string str) const;
+	std::string getInput(std::string str) const;
 };
 
-void	displayPhonebook(Contact phonebook[], int nbr_contacts);
-Contact CreateContact(void);
-std::string	correctContact(std::string field);
 #endif

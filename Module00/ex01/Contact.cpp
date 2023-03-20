@@ -1,60 +1,77 @@
 #include "Contact.hpp"
-#include <limits>
-#include <string>
 
-Contact::Contact(void) {return ;}
-
-std::string Contact::getFname(void)
+Contact::Contact()
 {
-	return (this->fname);
 }
 
-std::string Contact::getLname(void)
+Contact::~Contact()
 {
-	return (this->lname);
 }
 
-std::string Contact::getNickname(void)
+std::string Contact::getInput(std::string str) const
 {
-	return (this->nickname);
+	std::string input = "";
+	bool	correct = false;
+	while (correct == false)
+	{
+		std::cout << str << std::flush;
+		std::getline(std::cin, input);
+		if (std::cin.good() && !input.empty())
+			correct = true;
+		else
+		{
+			std::cin.clear();
+			std::cout << "Invalid input ! I'm sure if you try again you can do it !" << std::endl;
+		}
+	}
+	return (input);
 }
 
-std::string Contact::getPhonenum(void)
+void Contact::init(void)
 {
-	return (this->phonenum);
+	std::cin.ignore();
+	this->firstName = this->getInput("Please enter your first name: ");
+	this->lastName = this->getInput("Please enter your last name: ");
+	this->nickName = this->getInput("Please enter your nickname: ");
+	this->phoneNumber = this->getInput("Please enter your phone number: ");
+	this->darkestSecret = this->getInput("Please enter your darkest secret: ");
+	std::cout << std::endl;
 }
 
-std::string Contact::getSecret(void)
+std::string Contact::printLen(std::string str) const
 {
-	return (this->secret);
+	if (str.length() > 10)
+		return (str.substr(0, 9) + ".");
+	return(str);
 }
 
-void	Contact::setFname(std::string str)
+void	Contact::setIndex(int i)
 {
-	this->fname = str;
-	return;
+	this->index = i;
 }
 
-void	Contact::setLname(std::string str)
+void	Contact::view(int index) const
 {
-	this->lname = str;
-	return;
+	if (this->firstName.empty() || this->lastName.empty() || this->nickName.empty())
+		return;
+	std::cout << "|" << std::setw(10) << index << std::flush;
+	std::cout << "|" << std::setw(10) << this->printLen(this->firstName)<< std::flush;
+	std::cout << "|" << std::setw(10) << this->printLen(this->lastName) << std::flush;
+	std::cout << "|" << std::setw(10) << this->nickName << std::flush;
+	std::cout << "|" << std::endl;
 }
 
-void	Contact::setNickname(std::string str)
+void	Contact::display(void) const
 {
-	this->nickname = str;
-	return;
-}
-
-void	Contact::setPhonenum(std::string str)
-{
-	this->phonenum = str;
-	return;
-}
-
-void	Contact::setSecret(std::string str)
-{
-	this->secret = str;
-	return;
+	if (this->firstName.empty() || this->lastName.empty() || this->nickName.empty() || this->phoneNumber.empty() || this->darkestSecret.empty())
+		return;
+	std::cout << std::endl;
+	std::cout << "---" << this->firstName << " informations---" << std::endl;
+	std::cout << std::endl;
+	std::cout << "First name : " << this->firstName << std::endl;
+	std::cout << "Last name : " << this->lastName << std::endl;
+	std::cout << "Nickname : " << this->nickName << std::endl;
+	std::cout << "Phonenumber : " << this->phoneNumber << std::endl;
+	std::cout << "Darkest secret : " << this->darkestSecret << std::endl;
+	std::cout << std::endl;
 }

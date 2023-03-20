@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/14 16:19:42 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/03/20 18:13:43 by lmaurin-         ###   ########.fr       */
+/*   Created: 2023/03/14 16:14:57 by lmaurin-          #+#    #+#             */
+/*   Updated: 2023/03/14 16:20:15 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
-#include <iostream>
+#ifndef PHONEBOOK_HPP
+#define PHONEBOOK_HPP
 
-int main(void)
+#include "Contact.hpp"
+
+class PhoneBook
 {
-	PhoneBook book;
-	std::string input = "";
-	book.welcomeMsg();
-	while (input.compare("EXIT"))
-	{
-		if (input.compare("ADD") == 0)
-			book.addContact();
-		else if (input.compare("SEARCH") == 0)
-		{
-			book.printContacts();
-			book.search();
-		}
-		std::cout << "> " << std::flush;
-		std::cin >> input;
-	}
-	return (0);
-}
+private:
+    Contact contacts[8];
+	int		readInput(void) const;
+
+public:
+    PhoneBook();
+    ~PhoneBook();
+    void    addContact(void);
+    void    printContacts(void) const;
+    void    search(void) const;
+	void	welcomeMsg(void) const;
+};
+
+#endif
