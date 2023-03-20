@@ -6,15 +6,11 @@
 /*   By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:24:43 by lmaurin-          #+#    #+#             */
-/*   Updated: 2023/03/20 19:06:50 by lmaurin-         ###   ########.fr       */
+/*   Updated: 2023/03/20 19:24:39 by lmaurin-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-
-// void addContact(void);
-// void printContacts(void) const;
-// void search(void) const;
 
 PhoneBook::PhoneBook()
 {
