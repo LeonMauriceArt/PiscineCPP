@@ -1,42 +1,35 @@
+NAME        =    weapons
 
-NAME		:= weapons
+INC         =    Weapon.hpp HumanA.hpp HumanB.hpp
 
-INCLUDES	:= 	HumanA.hpp Weapon.hpp HumanB.hpp
-
-SRC			:= 	HumanA.cpp \
+SRCS        =   HumanA.cpp \
 				HumanB.cpp \
 				Weapon.cpp \
-				main.cpp 
-		
-OBJ 		:= 	$(SRC:.c=.o)
-CC 			:= c++
-CFLAGS 		:= -Wall -Wextra -Werror -std=c++98
+				main.cpp
 
-HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
-MEMFLAGS 	:= 	-fsanitize=address -g3
+OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
-all: $(NAME)
-	@echo "\033[32mCompilation done !\033[0m"
+CC          =    c++
 
-$(OPATH)/%.o 	: %.c $(HEADER) Makefile
-	@echo "Compiling $<..."
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+CFLAGS      =    -Wall -Werror -Wextra -std=c++98
 
-$(NAME) 		: $(OBJ)
-	@echo "Compiling $<..."	
-	@$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
+RM          =    rm -rf
+
+objs/%.o:	%.cpp ${INC} Makefile
+	@mkdir -p $(dir $@)             
+	$(CC) ${CFLAGS} -c $< -o $@
+
+all:	${NAME}
+
+${NAME}:	${OBJS} ${INC}             
+	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:
-	@echo "Cleaning..."
-	@rm -f $(NAME)
-	@echo "Cleaning..."
+	${RM} objs/
 
-fclean 			: clean
-	@echo "Force Cleaning..."
-	@rm $(NAME) || true
+fclean:	clean 
+	${RM} ${NAME}
 
-re: fclean all
+re:	fclean all
 
-
-.PHONY 			: clean fclean re
+.PHONY:		all clean fclean re
