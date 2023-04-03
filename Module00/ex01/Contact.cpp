@@ -69,7 +69,7 @@ void	Contact::view(int index) const
 	std::cout << "|" << std::setw(10) << index << std::flush;
 	std::cout << "|" << std::setw(10) << this->printLen(this->firstName)<< std::flush;
 	std::cout << "|" << std::setw(10) << this->printLen(this->lastName) << std::flush;
-	std::cout << "|" << std::setw(10) << this->nickName << std::flush;
+	std::cout << "|" << std::setw(10) << this->printLen(this->nickName) << std::flush;
 	std::cout << "|" << std::endl;
 }
 
