@@ -50,22 +50,19 @@ void PhoneBook::printContacts(void) const
 
 int	PhoneBook::readInput() const
 {
-	int input = -1;
-	bool correct = false;
-	while (correct == false)
+	std::string input = "";
+	while (!std::cin.eof())
 	{
 		std::cout << "Enter the desired contact index: " << std::flush;
-		std::cin >> input;
-		if (std::cin.good() && (input >= 0 && input < 8))
-			correct = true;
-		else
+		if (std::getline(std::cin, input) && input != "")
 		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-			std::cout << "Invalid index" << std::endl;
+			if (input.size() == 1 && input[0] >= '0' && input[0] < '8')
+				break;
 		}
+		if (input != "")
+			std::cout << "Invalid index !" << std::endl;
 	}
-	return (input);
+	return (input[0] - '0');
 }
 
 void PhoneBook::search(void) const

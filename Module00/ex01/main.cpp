@@ -18,17 +18,19 @@ int main(void)
 	PhoneBook book;
 	std::string input = "";
 	book.welcomeMsg();
-	while (input.compare("EXIT"))
+	std::cout << "> " << std::flush;
+	while (getline(std::cin, input) && !std::cin.eof() && input.compare("EXIT") != 0)
 	{
 		if (input.compare("ADD") == 0)
+		{
 			book.addContact();
+		}
 		else if (input.compare("SEARCH") == 0)
 		{
 			book.printContacts();
 			book.search();
 		}
 		std::cout << "> " << std::flush;
-		std::cin >> input;
 	}
 	return (0);
 }

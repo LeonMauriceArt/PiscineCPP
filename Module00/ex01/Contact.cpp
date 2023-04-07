@@ -23,25 +23,20 @@ Contact::~Contact()
 std::string Contact::getInput(std::string str) const
 {
 	std::string input = "";
-	bool	correct = false;
-	while (correct == false)
+	bool correct = false;
+	while (correct == false && !std::cin.eof())
 	{
 		std::cout << str << std::flush;
 		std::getline(std::cin, input);
-		if (std::cin.good() && !input.empty())
+		if (input.empty() == 0)
 			correct = true;
-		else
-		{
-			std::cin.clear();
-			std::cout << "Invalid input ! I'm sure if you try again you can do it !" << std::endl;
-		}
 	}
 	return (input);
 }
 
 void Contact::init(void)
 {
-	std::cin.ignore();
+	// std::cin.ignore();
 	this->firstName = this->getInput("Please enter your first name: ");
 	this->lastName = this->getInput("Please enter your last name: ");
 	this->nickName = this->getInput("Please enter your nickname: ");
