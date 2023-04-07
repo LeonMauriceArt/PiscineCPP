@@ -1,0 +1,129 @@
+#include "Fixed.hpp"
+
+Fixed::Fixed()
+{
+	this->fixedpointnum = 0;
+}
+
+Fixed::Fixed(const int num)
+{
+	this->fixedpointnum = num * (1 << this->fractional_bits);
+}
+
+Fixed::Fixed(const float num)
+{
+	this->fixedpointnum = roundf(num * (1 << this->fractional_bits));
+}
+
+Fixed::~Fixed()
+{
+}
+
+Fixed::Fixed(const Fixed &f)
+{
+	this->setRawBits(f.getRawBits());
+}
+
+Fixed &Fixed::operator=(const Fixed &f)
+{
+	this->setRawBits(f.getRawBits());
+	return (*this);
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)this->fixedpointnum / (1 << this->fractional_bits));
+}
+
+int Fixed::toInt(void) const
+{
+	return (this->fixedpointnum / (1 << this->fractional_bits));
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
+{
+	out << fixed.toFloat();
+	return (out);
+}
+
+int Fixed::getRawBits(void) const
+{
+	return(this->fixedpointnum);
+}
+
+void Fixed::setRawBits(int const raw)
+{
+	this->fixedpointnum = raw;
+}
+
+Fixed Fixed::operator+(const Fixed &f)
+{
+	this->fixedpointnum += f.fixedpointnum;
+	return (*this);
+}
+
+Fixed Fixed::operator-(const Fixed &f)
+{
+	this->fixedpointnum -= f.fixedpointnum;
+	return (*this);
+}
+
+Fixed Fixed::operator*(const Fixed &f) const
+{
+	Fixed result;
+	result = this->fixedpointnum * f.fixedpointnum;
+	return (result);
+}
+
+// Fixed Fixed::operator/(const Fixed &f)
+// {
+
+// }
+// bool Fixed::operator>(const Fixed &f)
+// {
+
+// }
+
+// bool Fixed::operator>=(const Fixed &f)
+// {
+
+// }
+
+// bool Fixed::operator<(const Fixed &f)
+// {
+
+// }
+
+// bool Fixed::operator<=(const Fixed &f)
+// {
+
+// }
+// bool Fixed::operator==(const Fixed &f)
+// {
+
+// }
+
+// bool Fixed::operator!=(const Fixed &f)
+// {
+
+// }
+
+// Fixed Fixed::operator++(void)
+// {
+
+// }
+
+// Fixed Fixed::operator--(void)
+// {
+
+// }
+
+// Fixed Fixed::operator++(int)
+// {
+
+// }
+
+// Fixed Fixed::operator--(int)
+// {
+
+// }
