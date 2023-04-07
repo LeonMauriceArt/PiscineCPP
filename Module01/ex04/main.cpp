@@ -15,6 +15,11 @@ int	main(int ac, char *av[])
 	std::ifstream file;
 	std::string	file_copy = "";
 	file.open(av[1], std::ios::in);
+	if (!file.is_open())
+	{
+		std::cout << "File is not accessible or does not exist !" << std::endl;
+		return (1);
+	}
 	while (true)
 	{
 		std::string buff;
