@@ -6,6 +6,18 @@ Fixed::Fixed()
 	std::cout << "Default constructor called" << std::endl;
 }
 
+Fixed::Fixed(const int num)
+{
+	std::cout << "Int constructor called" << std::endl;
+	this->fixedpointnum = num * (1 << this->fractional_bits);
+}
+
+Fixed::Fixed(const float num)
+{
+	std::cout << "Float constructor called" << std::endl;
+	this->fixedpointnum = roundf(num * (1 << this->fractional_bits));
+}
+
 Fixed::~Fixed()
 {
 	std::cout << "Destructor called" << std::endl;
@@ -24,9 +36,24 @@ Fixed &Fixed::operator=(const Fixed &f)
 	return (*this);
 }
 
+float Fixed::toFloat(void) const
+{
+	return ((float)this->fixedpointnum / (1 << this->fractional_bits));
+}
+
+int Fixed::toInt(void) const
+{
+	return (this->fixedpointnum / (1 << this->fractional_bits));
+}
+
+std::ostream& operator<<(std::ostream& out, const Fixed& fixed)
+{
+	out << fixed.toFloat();
+	return (out);
+}
+
 int Fixed::getRawBits(void) const
 {
-	std::cout << "getRawBits member function called" << std::endl;
 	return(this->fixedpointnum);
 }
 
