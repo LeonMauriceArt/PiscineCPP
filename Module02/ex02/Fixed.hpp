@@ -25,20 +25,20 @@ class Fixed
 			//arithmetic operators
 		Fixed operator+(const Fixed& f);
 		Fixed operator-(const Fixed& f);
-		Fixed operator*(const Fixed& f)const;
-		// Fixed operator/(const Fixed& f);
+		Fixed operator*(const Fixed& f);
+		Fixed operator/(const Fixed& f);
 		// 	//comparison operators
-		// bool operator>(const Fixed &f);
-		// bool operator>=(const Fixed &f);
-		// bool operator<(const Fixed &f);
-		// bool operator<=(const Fixed &f);
-		// bool operator==(const Fixed &f);
-		// bool operator!=(const Fixed &f);
+		bool operator>(const Fixed &f);
+		bool operator>=(const Fixed &f);
+		bool operator<(const Fixed &f);
+		bool operator<=(const Fixed &f);
+		bool operator==(const Fixed &f);
+		bool operator!=(const Fixed &f);
 		// 	//increment operators
-		// Fixed operator++(void);
-		// Fixed operator--(void);
-		// Fixed operator++(int);
-		// Fixed operator--(int);
+		Fixed operator++(void);
+		Fixed operator--(void);
+		Fixed operator++(int);
+		Fixed operator--(int);
 
 		// insertion operator
 		friend std::ostream& operator<<(std::ostream& out, const Fixed& f);

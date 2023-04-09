@@ -68,62 +68,83 @@ Fixed Fixed::operator-(const Fixed &f)
 	return (*this);
 }
 
-Fixed Fixed::operator*(const Fixed &f) const
+Fixed Fixed::operator*(const Fixed &f)
 {
-	Fixed result;
-	result = this->fixedpointnum * f.fixedpointnum;
-	return (result);
+	this->fixedpointnum = (this->fixedpointnum * f.fixedpointnum) >> this->fractional_bits;
+	return (*this);
 }
 
-// Fixed Fixed::operator/(const Fixed &f)
-// {
+Fixed Fixed::operator/(const Fixed &f)
+{
+	this->fixedpointnum = (this->fixedpointnum / f.fixedpointnum) >> this->fractional_bits;
+	return (*this);
+}
 
-// }
-// bool Fixed::operator>(const Fixed &f)
-// {
+bool Fixed::operator>(const Fixed &f)
+{
+	if (this->fixedpointnum > f.fixedpointnum)
+		return (true);
+	return (false);
+}
 
-// }
+bool Fixed::operator>=(const Fixed &f)
+{
+	if (this->fixedpointnum >= f.fixedpointnum)
+		return (true);
+	return (false);
+}
 
-// bool Fixed::operator>=(const Fixed &f)
-// {
+bool Fixed::operator<(const Fixed &f)
+{
+	if (this->fixedpointnum < f.fixedpointnum)
+		return (true);
+	return (false);
+}
 
-// }
+bool Fixed::operator<=(const Fixed &f)
+{
+	if (this->fixedpointnum <= f.fixedpointnum)
+		return (true);
+	return (false);
+}
+bool Fixed::operator==(const Fixed &f)
+{
+	if (this->fixedpointnum == f.fixedpointnum)
+		return (true);
+	return (false);
+}
 
-// bool Fixed::operator<(const Fixed &f)
-// {
+bool Fixed::operator!=(const Fixed &f)
+{
+	if (this->fixedpointnum != f.fixedpointnum)
+		return (true);
+	return (false);
+}
 
-// }
+Fixed Fixed::operator++(void)
+{
+	this->fixedpointnum = this->fixedpointnum + 1;
+	return (*this);
+}
 
-// bool Fixed::operator<=(const Fixed &f)
-// {
+Fixed Fixed::operator--(void)
+{
+	this->fixedpointnum = this->fixedpointnum - 1;
+	return (*this);
+}
 
-// }
-// bool Fixed::operator==(const Fixed &f)
-// {
+//post increment
+Fixed Fixed::operator++(int)
+{
+	Fixed tmp(*this);
+	this->fixedpointnum = this->fixedpointnum + 1;
+	return (tmp);
+}
 
-// }
-
-// bool Fixed::operator!=(const Fixed &f)
-// {
-
-// }
-
-// Fixed Fixed::operator++(void)
-// {
-
-// }
-
-// Fixed Fixed::operator--(void)
-// {
-
-// }
-
-// Fixed Fixed::operator++(int)
-// {
-
-// }
-
-// Fixed Fixed::operator--(int)
-// {
-
-// }
+//post decrement
+Fixed Fixed::operator--(int)
+{
+	Fixed tmp(*this);
+	this->fixedpointnum = this->fixedpointnum - 1;
+	return (tmp);
+}
