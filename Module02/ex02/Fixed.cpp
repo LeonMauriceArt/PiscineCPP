@@ -148,3 +148,31 @@ Fixed Fixed::operator--(int)
 	this->fixedpointnum = this->fixedpointnum - 1;
 	return (tmp);
 }
+
+Fixed Fixed::min(Fixed &fix1, Fixed &fix2)
+{
+	if (fix1.fixedpointnum < fix2.fixedpointnum)
+		return (fix1);
+	return (fix2);
+}
+
+Fixed Fixed::min(const Fixed &fix1, const Fixed &fix2)
+{
+	if (fix1.fixedpointnum < fix2.fixedpointnum)
+		return (fix1);
+	return (fix2);
+}
+
+Fixed Fixed::max(Fixed &fix1, Fixed &fix2)
+{
+	if (fix1.fixedpointnum > fix2.fixedpointnum)
+		return (fix1);
+	return (fix2);
+}
+
+Fixed Fixed::max(const Fixed &fix1, const Fixed &fix2)
+{
+	if (fix1.fixedpointnum > fix2.fixedpointnum)
+		return (fix1);
+	return (fix2);
+}

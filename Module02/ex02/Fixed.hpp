@@ -44,10 +44,10 @@ class Fixed
 		friend std::ostream& operator<<(std::ostream& out, const Fixed& f);
 
 		//function members
-		static int& min(int& fix1, int& fix2);
-		static int& min(const int &fix1, const int &fix2);
-		static int& max(int &fix1, int &fix2);
-		static int& max(const int &fix1, const int &fix2);
+		static Fixed min(Fixed &fix1, Fixed &fix2);
+		static Fixed min(const Fixed &fix1, const Fixed &fix2);
+		static Fixed max(Fixed &fix1, Fixed &fix2);
+		static Fixed max(const Fixed &fix1, const Fixed &fix2);
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
 		float toFloat(void) const;
