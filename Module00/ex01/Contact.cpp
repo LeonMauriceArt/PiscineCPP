@@ -26,7 +26,7 @@ std::string Contact::getInput(std::string str) const
 	bool correct = false;
 	while (correct == false && !std::cin.eof())
 	{
-		std::cout << str << std::flush;
+		std::cout << str;
 		std::getline(std::cin, input);
 		if (input.empty() == 0)
 			correct = true;
@@ -61,10 +61,10 @@ void	Contact::view(int index) const
 {
 	if (this->firstName.empty() || this->lastName.empty() || this->nickName.empty())
 		return;
-	std::cout << "|" << std::setw(10) << index << std::flush;
-	std::cout << "|" << std::setw(10) << this->printLen(this->firstName)<< std::flush;
-	std::cout << "|" << std::setw(10) << this->printLen(this->lastName) << std::flush;
-	std::cout << "|" << std::setw(10) << this->printLen(this->nickName) << std::flush;
+	std::cout << "|" << std::setw(10) << index;
+	std::cout << "|" << std::setw(10) << this->printLen(this->firstName);
+	std::cout << "|" << std::setw(10) << this->printLen(this->lastName);
+	std::cout << "|" << std::setw(10) << this->printLen(this->nickName);
 	std::cout << "|" << std::endl;
 }
 

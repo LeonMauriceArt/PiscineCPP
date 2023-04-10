@@ -53,7 +53,7 @@ int	PhoneBook::readInput() const
 	std::string input = "";
 	while (!std::cin.eof())
 	{
-		std::cout << "Enter the desired contact index: " << std::flush;
+		std::cout << "Enter the desired contact index: ";
 		if (std::getline(std::cin, input) && input != "")
 		{
 			if (input.size() == 1 && input[0] >= '0' && input[0] < '8')

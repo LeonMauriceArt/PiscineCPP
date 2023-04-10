@@ -18,7 +18,7 @@ int main(void)
 	PhoneBook book;
 	std::string input = "";
 	book.welcomeMsg();
-	std::cout << "> " << std::flush;
+	std::cout << "> ";
 	while (getline(std::cin, input) && !std::cin.eof() && input.compare("EXIT") != 0)
 	{
 		if (input.compare("ADD") == 0)
@@ -30,7 +30,7 @@ int main(void)
 			book.printContacts();
 			book.search();
 		}
-		std::cout << "> " << std::flush;
+		std::cout << "> ";
 	}
 	return (0);
 }
