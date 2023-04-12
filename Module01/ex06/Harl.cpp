@@ -1,22 +1,18 @@
-
 #include "Harl.hpp"
 
-void Harl::debug(void)
+void    Harl::debug(void)
 {
     std::cout << "I'm a debug message" << std::endl;
-    this->complain("INFO");
 }
 
 void Harl::info(void)
 {
     std::cout << "I'm a info message" << std::endl;
-    this->complain("WARNING");
 }
 
 void Harl::warning(void)
 {
     std::cout << "I'm a warning message" << std::endl;
-    this->complain("ERROR");
 }
 
 void Harl::error(void)

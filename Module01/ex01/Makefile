@@ -1,58 +1,34 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lmaurin- <lmaurin-@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/22 14:24:21 by lmaurin-          #+#    #+#              #
-#    Updated: 2023/03/28 15:35:58 by lmaurin-         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME        =	zombieHorde
 
-NAME		:= Zombies
+INC			=	Zombie.hpp
 
-INCLUDES	:= 	Zombie.hpp
+SRCS        =   Zombie.cpp \
+				zombieHorde.cpp \
+				main.cpp
 
-SRC			:= 	zombieHorde.cpp \
-				Zombie.cpp \
-				main.cpp 
-		
-OBJ 		:= 	$(SRC:.c=.o)
-CC 			:= c++
-CFLAGS 		:= -Wall -Wextra -Werror -std=c++98
+OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
-HEADER 		:= 	$(addprefix includes/,$(INCLUDES))
-MEMFLAGS 	:= 	-fsanitize=address -g3
+CC          =    c++
 
-all: $(NAME)
-	@echo "\033[32mCompilation done !\033[0m"
+CFLAGS      =    -Wall -Werror -Wextra -std=c++98
 
-$(OPATH)/%.o 	: %.c $(HEADER) Makefile
-	@echo "Compiling $<..."
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+RM          =    rm -rf
 
+objs/%.o:	%.cpp ${INC} Makefile
+	@mkdir -p $(dir $@)             
+	$(CC) ${CFLAGS} -c $< -o $@
 
-zombies: $(SRC)
-	@echo "Compiling $<..."	
-	@$(CC) $(CFLAGS) -o $@ $<
+all:	${NAME}
 
-
-$(NAME) 		: $(OBJ)
-	@echo "Compiling $<..."	
-	@$(CC) $(CFLAGS) $^ -o $@ $(MLXFLAGS)
+${NAME}:	${OBJS} ${INC}             
+	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:
-	@echo "Cleaning..."
-	@rm -f $(NAME)
-	@echo "Cleaning..."
+	${RM} objs/
 
-fclean 			: clean
-	@echo "Force Cleaning..."
-	@rm $(NAME) || true
+fclean:	clean 
+	${RM} ${NAME}
 
-re: fclean all
+re:	fclean all
 
-
-.PHONY 			: clean fclean re
+.PHONY:		all clean fclean re
