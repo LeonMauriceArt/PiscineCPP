@@ -20,6 +20,8 @@ int main(void)
 	Bill.beRepaired(90);
 	Bill.takeDamage(11);
 	Bill.attack("someone");
+	Bill.beRepaired(5);
+	Bill.takeDamage(5);
 	std::cout << "-------------------------------------" << std::endl;
 	std::cout << "--------------Sarah energy tests-------------" << std::endl;
 	ClapTrap Sarah("Sarah");
