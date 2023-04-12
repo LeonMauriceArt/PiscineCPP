@@ -16,6 +16,7 @@ int main(void)
 	std::cout << "--------------Bill damage / repair tests-------------" << std::endl;
 	ClapTrap Bill("Bill");
 	Bill.takeDamage(8);
+	Bill.takeDamage(1);
 	Bill.beRepaired(90);
 	Bill.takeDamage(11);
 	Bill.attack("someone");
@@ -23,8 +24,8 @@ int main(void)
 	std::cout << "--------------Sarah energy tests-------------" << std::endl;
 	ClapTrap Sarah("Sarah");
 	Sarah.beRepaired(1);
+	Sarah.takeDamage(1);
 	Sarah.beRepaired(3);
-	Sarah.beRepaired(1);
 	Sarah.beRepaired(55);
 	Sarah.beRepaired(10);
 	Sarah.beRepaired(1);
@@ -33,6 +34,7 @@ int main(void)
 	Sarah.beRepaired(1);
 	Sarah.beRepaired(1);
 	Sarah.beRepaired(101);
+	Sarah.beRepaired(1);
 	Sarah.attack("someone");
 	Sarah.takeDamage(30);
 	Sarah.beRepaired(101);
