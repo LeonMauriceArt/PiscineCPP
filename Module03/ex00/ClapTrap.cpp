@@ -71,6 +71,8 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "Claptrap got an error : he can't repair a negative amount." << std::endl;
 		return;
 	}
+	if (amount > this->HitPoints)
+		amount = this->HitPoints;
 	if (this->HitPoints <= 0)
 	{
 		std::cout << "Claptrap " << this->Name << " try to repair himself, but is dead and can't do anything." << std::endl;

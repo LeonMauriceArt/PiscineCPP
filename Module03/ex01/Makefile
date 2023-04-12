@@ -1,4 +1,4 @@
-NAME        =	claptrap
+NAME        =	scavtrap
 
 INC			=	ClapTrap.hpp
 
