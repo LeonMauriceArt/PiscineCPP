@@ -2,7 +2,7 @@
 
 ClapTrap::ClapTrap()
 {
-	this->Name = "NoName";
+	this->Name = "Unknown";
 	this->AttackDamage = 0;
 	this->EnergyPoints = 10;
 	this->HitPoints = 10;

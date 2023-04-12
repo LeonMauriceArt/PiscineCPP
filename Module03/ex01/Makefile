@@ -1,8 +1,9 @@
 NAME        =	scavtrap
 
-INC			=	ClapTrap.hpp
+INC			=	ClapTrap.hpp ScavTrap.hpp
 
 SRCS        =   ClapTrap.cpp \
+				ScavTrap.cpp \
 				main.cpp
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
