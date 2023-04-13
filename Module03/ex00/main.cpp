@@ -7,7 +7,7 @@ int main(void)
 	ClapTrap Joe("Joe");
 	ClapTrap John;
 	Joe.attack("someone");
-	Joe.takeDamage(15);
+	Joe.takeDamage(4);
 	Joe.beRepaired(3);
 	Joe.takeDamage(6);
 	John = Joe;
