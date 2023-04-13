@@ -34,7 +34,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &c)
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->HitPoints <= 0)
+	if (this->HitPoints == 0)
 	{
 		std::cout << "Claptrap " << this->Name << " try to attack " << target << ", but is dead and can't do anything." << std::endl;
 		return;
@@ -50,14 +50,16 @@ void ClapTrap::attack(const std::string& target)
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if ((int)amount < 0)
-	{
-		std::cout << "Claptrap got an error : he can't take negative damage." << std::endl;
-		return;
-	}
-	if (this->HitPoints <= 0)
+	if (this->HitPoints == 0)
 	{
 		std::cout << "Claptrap " << this->Name << " is already dead and can't take damage." << std::endl;
+		return;
+	}
+	if (amount >= this->HitPoints)
+	{
+		amount = this->HitPoints;
+		std::cout << "Claptrap " << this->Name << " take " << amount << " damage, it is FATAL!" << std::endl;
+		this->HitPoints = 0;
 		return;
 	}
 	this->HitPoints -= amount;
@@ -66,18 +68,13 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if ((int)amount < 0)
-	{
-		std::cout << "Claptrap got an error : he can't repair a negative amount." << std::endl;
-		return;
-	}
-	if (amount > 10)
-		amount = 10;
 	if (this->HitPoints <= 0)
 	{
 		std::cout << "Claptrap " << this->Name << " try to repair himself, but is dead and can't do anything." << std::endl;
 		return;
 	}
+	if (amount > 10)
+		amount = 10;
 	if (this->EnergyPoints > 0)
 	{
 		this->EnergyPoints--;
