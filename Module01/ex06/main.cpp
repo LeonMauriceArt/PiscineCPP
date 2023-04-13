@@ -22,18 +22,12 @@ int main(int ac, char *av[])
 	{
 	case 0:
 		myHarl.complain("DEBUG");
-		myHarl.complain("INFO");
-		myHarl.complain("WARNING");
-		myHarl.complain("ERROR");
 		break;
 	case 1:
 		myHarl.complain("INFO");
-		myHarl.complain("WARNING");
-		myHarl.complain("ERROR");
 		break;
 	case 2:
 		myHarl.complain("WARNING");
-		myHarl.complain("ERROR");
 		break;
 	case 3:
 		myHarl.complain("ERROR");

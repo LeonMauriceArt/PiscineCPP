@@ -2,22 +2,22 @@
 
 void    Harl::debug(void)
 {
-    std::cout << "I'm a debug message" << std::endl;
+    std::cout << "I'm an debug message" << std::endl;
 }
 
 void Harl::info(void)
 {
-    std::cout << "I'm a info message" << std::endl;
+    std::cout << "I'm an info message" << std::endl;
 }
 
 void Harl::warning(void)
 {
-    std::cout << "I'm a warning message" << std::endl;
+    std::cout << "I'm an warning message" << std::endl;
 }
 
 void Harl::error(void)
 {
-    std::cout << "I'm a error message" << std::endl;
+    std::cout << "I'm an error message" << std::endl;
 }
 
 void Harl::complain(std::string level)

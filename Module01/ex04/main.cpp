@@ -19,7 +19,7 @@ int	main(int ac, char *av[])
 		std::cout << "Error : string to replace cannot be empty." << std::endl;
 		return (1);
 	}
-	//getting a string copy of file
+	//opening file
 	std::ifstream file;
 	std::string	file_copy = "";
 	file.open(av[1], std::ios::in);

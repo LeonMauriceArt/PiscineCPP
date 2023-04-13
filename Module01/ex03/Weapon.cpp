@@ -2,6 +2,11 @@
 
 void Weapon::setType(std::string str)
 {
+	if (str.empty())
+	{
+		this->type = "ghost weapon";
+		return;
+	}
     this->type = str;
 }
 
@@ -12,7 +17,12 @@ const std::string& Weapon::getType(void)
 
 Weapon::Weapon(std::string type)
 {
-    this->type = type;
+	if (type.empty())
+	{
+		this->type = "ghost weapon";
+		return;
+	}
+	this->type = type;
 }
 
 Weapon::~Weapon(void)
