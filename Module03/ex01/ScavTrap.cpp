@@ -3,9 +3,10 @@
 ScavTrap::ScavTrap()
 {
 	this->Name = "Unknown";
-	this->AttackDamage = 0;
-	this->EnergyPoints = 10;
-	this->HitPoints = 10;
+	this->AttackDamage = 20;
+	this->EnergyPoints = 50;
+	this->HitPoints = 100;
+	this->keepingGate = false;
 	std::cout << "ScavTrap with no name created." << std::endl;
 }
 
@@ -20,7 +21,8 @@ ScavTrap::ScavTrap(std::string name)
 	this->AttackDamage = 20;
 	this->EnergyPoints = 50;
 	this->HitPoints = 100;
-	std::cout << "Claptrap " << this->Name << " created." << std::endl;
+	this->keepingGate = false;
+	std::cout << "Scavtrap " << this->Name << " created." << std::endl;
 }
 
 void ScavTrap::attack(const std::string &target)

@@ -2,64 +2,74 @@
 
 ClapTrap::ClapTrap()
 {
-	this->Name = "NoName";
-	this->AttackDamage = 0;
-	this->EnergyPoints = 10;
-	this->HitPoints = 10;
+	this->_name = "NoName";
+	this->_attackDamage = 0;
+	this->_energyPoints = 10;
+	this->_hitPoints = 10;
+	this->_maxHitpoints = 10;
 	std::cout << "Claptrap with no name created." << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
 {
-	this->Name = name;
-	this->AttackDamage = 0;
-	this->EnergyPoints = 10;
-	this->HitPoints = 10;
-	std::cout << "Claptrap " << this->Name << " created." << std::endl;
+	this->_name = name;
+	this->_attackDamage = 0;
+	this->_energyPoints = 10;
+	this->_hitPoints = 10;
+	this->_maxHitpoints = 10;
+	std::cout << "Claptrap " << this->_name << " created." << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Claptrap " << this->Name << " destroyed." << std::endl;
+	std::cout << "Claptrap " << this->_name << " destroyed." << std::endl;
+}
+
+ClapTrap::ClapTrap(const ClapTrap &c)
+{
+	this->_name = c._name;
+	this->_hitPoints = c._hitPoints;
+	this->_energyPoints = c._energyPoints;
+	this->_attackDamage = c._attackDamage;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &c)
 {
-	this->AttackDamage = c.AttackDamage;
-	this->EnergyPoints = c.EnergyPoints;
-	this->HitPoints = c.HitPoints;
-	this->Name = c.Name;
+	this->_name = c._name;
+	this->_hitPoints = c._hitPoints;
+	this->_energyPoints = c._energyPoints;
+	this->_attackDamage = c._attackDamage;
 	return (*this);
 }
 
 void ClapTrap::attack(const std::string& target)
 {
-	if (this->HitPoints == 0)
+	if (this->_hitPoints == 0)
 	{
-		std::cout << "Claptrap " << this->Name << " try to attack " << target << ", but is dead and can't do anything." << std::endl;
+		std::cout << "Claptrap " << this->_name << " try to attack " << target << ", but is dead and can't do anything." << std::endl;
 		return;
 	}
-	if (this->EnergyPoints > 0)
+	if (this->_energyPoints > 0)
 	{
-		this->EnergyPoints--;
-		std::cout << "Claptrap " << this->Name << " attacks " << target << ", causing " << this->AttackDamage << " !" << std::endl;
+		this->_energyPoints--;
+		std::cout << "Claptrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " !" << std::endl;
 		return;
 	}
-	std::cout << "Claptrap " << this->Name << " doesn't have enough energy to attack !" << std::endl;
+	std::cout << "Claptrap " << this->_name << " doesn't have enough energy to attack !" << std::endl;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (this->HitPoints == 0)
+	if (this->_hitPoints == 0)
 	{
 		std::cout << "Claptrap " << this->Name << " is already dead and can't take damage." << std::endl;
 		return;
 	}
-	if (amount >= this->HitPoints)
+	if (amount >= this->_hitPoints)
 	{
-		amount = this->HitPoints;
-		std::cout << "Claptrap " << this->Name << " take " << amount << " damage, it is FATAL!" << std::endl;
-		this->HitPoints = 0;
+		amount = this->_hitPoints;
+		std::cout << "Claptrap " << this->_name << " take " << amount << " damage, it is FATAL!" << std::endl;
+		this->_hitPoints = 0;
 		return;
 	}
 	this->HitPoints -= amount;
@@ -68,30 +78,30 @@ void ClapTrap::takeDamage(unsigned int amount)
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->HitPoints <= 0)
+	if (this->_hitPoints <= 0)
 	{
-		std::cout << "Claptrap " << this->Name << " try to repair himself, but is dead and can't do anything." << std::endl;
+		std::cout << "Claptrap " << this->_name << " try to repair himself, but is dead and can't do anything." << std::endl;
 		return;
 	}
-	if (amount > 10)
-		amount = 10;
-	if (this->EnergyPoints > 0)
+	if (amount > this->_maxHitpoints)
+		amount = this->_maxHitpoints;
+	if (this->_energyPoints > 0)
 	{
-		this->EnergyPoints--;
-		if (this->HitPoints == 10)
+		this->_energyPoints--;
+		if (this->_hitPoints == 10)
 		{
-			std::cout << "Claptrap " << this->Name << " tries to repair himself but is already healthy !" << std::endl;
+			std::cout << "Claptrap " << this->_name << " tries to repair himself but is already healthy !" << std::endl;
 			return;
 		}
-		if (this->HitPoints + amount <= 10)
-			this->HitPoints += amount;
-		else if (this->HitPoints + amount > 10)
+		if (this->_hitPoints + amount <= 10)
+			this->_hitPoints += amount;
+		else if (this->_hitPoints + amount > this->_maxHitpoints)
 		{
-			amount = 10 - this->HitPoints;
-			this->HitPoints = 10;
+			amount = this->_maxHitpoints - this->_hitPoints;
+			this->_hitPoints = 10;
 		}
-		std::cout << "Claptrap " << this->Name << " has repaired himself " << amount << " points !" << std::endl;
+		std::cout << "Claptrap " << this->_name << " has repaired himself " << amount << " points !" << std::endl;
 		return;
 	}
-	std::cout << "Claptrap " << this->Name << " doesn't have enough energy to repair !" << std::endl;
+	std::cout << "Claptrap " << this->_name << " doesn't have enough energy to repair !" << std::endl;
 }

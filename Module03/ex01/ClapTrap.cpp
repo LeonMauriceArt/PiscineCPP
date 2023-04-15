@@ -23,6 +23,14 @@ ClapTrap::~ClapTrap()
 	std::cout << "Claptrap " << this->Name << " destroyed." << std::endl;
 }
 
+ClapTrap::ClapTrap(const ClapTrap &c)
+{
+	this->Name = c.Name;
+	this->HitPoints = c.HitPoints;
+	this->EnergyPoints = c.EnergyPoints;
+	this->AttackDamage = c.AttackDamage;
+}
+
 ClapTrap &ClapTrap::operator=(const ClapTrap &c)
 {
 	this->AttackDamage = c.AttackDamage;
@@ -79,7 +87,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 	if (this->EnergyPoints > 0)
 	{
 		this->EnergyPoints--;
-		if (this->HitPoints + amount <= 10)
+		if (this->HitPoints + amount <= 10) //CAREFUL FOR SCAVTRAP MAX HP !!!!!!!!!!!!!!!!!!
 			this->HitPoints += amount;
 		else if (this->HitPoints + amount > 10)
 		{
