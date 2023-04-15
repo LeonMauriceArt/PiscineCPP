@@ -12,7 +12,7 @@ class ScavTrap: public ClapTrap
 		ScavTrap(std::string name);
 		void attack(const std::string &target);
 		~ScavTrap();
-		void guardGate();
+		void guardGate(void);
 };
 
 #endif

@@ -17,7 +17,7 @@ int main(void)
 	ClapTrap Bill("Bill");
 	Bill.takeDamage(8);
 	Bill.beRepaired(90);
-	Bill.takeDamage(556166);
+	Bill.takeDamage(556);
 	Bill.takeDamage(11);
 	Bill.attack("someone");
 	Bill.beRepaired(5);
