@@ -5,8 +5,7 @@ ClapTrap::ClapTrap()
 	this->_name = "No_name";
 	this->_attackDamage = 0;
 	this->_energyPoints = 10;
-	this->_hitPoints = 10;
-	this->_maxHitpoints = 10;
+	this->_hitPoints = this->_maxHitpoints;
 	std::cout << "Claptrap with no name created." << std::endl;
 }
 
@@ -15,8 +14,7 @@ ClapTrap::ClapTrap(std::string name)
 	this->_name = name;
 	this->_attackDamage = 0;
 	this->_energyPoints = 10;
-	this->_hitPoints = 10;
-	this->_maxHitpoints = 10;
+	this->_hitPoints = this->_maxHitpoints;
 	std::cout << "Claptrap " << this->_name << " created." << std::endl;
 }
 
@@ -31,7 +29,6 @@ ClapTrap::ClapTrap(const ClapTrap &c)
 	this->_hitPoints = c._hitPoints;
 	this->_energyPoints = c._energyPoints;
 	this->_attackDamage = c._attackDamage;
-	this->_maxHitpoints = c._maxHitpoints;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &c)
@@ -40,7 +37,6 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &c)
 	this->_hitPoints = c._hitPoints;
 	this->_energyPoints = c._energyPoints;
 	this->_attackDamage = c._attackDamage;
-	this->_maxHitpoints = c._maxHitpoints;
 	return (*this);
 }
 

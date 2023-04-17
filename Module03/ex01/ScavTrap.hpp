@@ -6,6 +6,7 @@
 class ScavTrap: public ClapTrap
 {
 	private:
+		static const int _maxHitpoints = 100;
 		bool _keepingGate;
 	public:
 		ScavTrap();

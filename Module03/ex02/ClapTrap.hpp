@@ -10,8 +10,8 @@ class ClapTrap
 		int _hitPoints;
 		int _energyPoints;
 		int _attackDamage;
-		unsigned int _maxHitpoints;
-		
+		static const int _maxHitpoints = 10;
+
 	public:
 		ClapTrap();
 		ClapTrap(std::string name);

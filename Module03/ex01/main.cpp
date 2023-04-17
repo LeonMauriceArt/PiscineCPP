@@ -4,6 +4,8 @@ int main(void)
 {
 	ScavTrap scav("Vladimir");
 	ScavTrap clap(scav);
+	scav.takeDamage(66);
+	scav.takeDamage(55);
 	for (int i = 0; i < 55; i++)
 		scav.attack("Someone");
 	scav.attack("Rusky");

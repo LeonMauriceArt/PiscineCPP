@@ -5,8 +5,7 @@ ScavTrap::ScavTrap()
 	this->_name = "Unknown";
 	this->_attackDamage = 20;
 	this->_energyPoints = 50;
-	this->_hitPoints = 100;
-	this->_maxHitpoints = 100;
+	this->_hitPoints = this->_maxHitpoints;
 	this->_keepingGate = false;
 	std::cout << "ScavTrap with no name created." << std::endl;
 }
@@ -21,8 +20,7 @@ ScavTrap::ScavTrap(std::string name)
 	this->_name = name;
 	this->_attackDamage = 20;
 	this->_energyPoints = 50;
-	this->_hitPoints = 100;
-	this->_maxHitpoints = 100;
+	this->_hitPoints = this->_maxHitpoints;
 	this->_keepingGate = false;
 	std::cout << "Scavtrap " << this->_name << " created." << std::endl;
 }
