@@ -12,10 +12,11 @@ class Fixed
 
 	public:
 		//constructors
+		Fixed();
 		Fixed(const int num);
 		Fixed(const float num);
+		//copy constructor
 		Fixed(const Fixed& f);
-		Fixed();
 		//destructor
 		~Fixed();
 
@@ -41,7 +42,6 @@ class Fixed
 		Fixed operator--(int);
 
 		// insertion operator
-		friend std::ostream& operator<<(std::ostream& out, const Fixed& f);
 
 		//function members
 		static Fixed min(Fixed &fix1, Fixed &fix2);
@@ -53,5 +53,7 @@ class Fixed
 		float toFloat(void) const;
 		int toInt(void) const;
 };
+
+std::ostream& operator<<(std::ostream& out, const Fixed& f);
 
 #endif
