@@ -20,6 +20,9 @@ int main()
 	std::cout << wrong->getType() << " " << std::endl;
 	wrong->makeSound();
 
+	WrongCat kitty;
+	kitty.makeSound();
+
 	delete(wrong);
 	return 0;
 }
