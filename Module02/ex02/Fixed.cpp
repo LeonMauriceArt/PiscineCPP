@@ -58,26 +58,22 @@ void Fixed::setRawBits(int const raw)
 
 Fixed Fixed::operator+(const Fixed &f)
 {
-	this->fixedpointnum += f.fixedpointnum;
-	return (*this);
+	return (Fixed(this->toFloat() + f.toFloat()));
 }
 
 Fixed Fixed::operator-(const Fixed &f)
 {
-	this->fixedpointnum -= f.fixedpointnum;
-	return (*this);
+	return (Fixed(this->toFloat() - f.toFloat()));
 }
 
 Fixed Fixed::operator*(const Fixed &f)
 {
-	this->fixedpointnum = (this->fixedpointnum * f.fixedpointnum) >> this->fractional_bits;
-	return (*this);
+	return (Fixed(this->toFloat() * f.toFloat()));
 }
 
 Fixed Fixed::operator/(const Fixed &f)
 {
-	this->fixedpointnum = (this->fixedpointnum / f.fixedpointnum) >> this->fractional_bits;
-	return (*this);
+	return (Fixed(this->toFloat() / f.toFloat()));
 }
 
 bool Fixed::operator>(const Fixed &f)
