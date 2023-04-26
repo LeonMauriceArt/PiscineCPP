@@ -12,6 +12,9 @@ int main(void)
 	Joe.takeDamage(6);
 	John = Joe;
 	John.attack("someone");
+	John.takeDamage(5);
+	John.attack("someone");
+	Joe.attack("a cheese");
 	std::cout << "-------------------------------------" << std::endl;
 	std::cout << "--------------Bill damage / repair tests-------------" << std::endl;
 	ClapTrap Bill("Bill");
