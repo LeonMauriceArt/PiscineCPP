@@ -32,6 +32,7 @@ int main()
 	std::cout << "---END OF DELETE TEST---" << std::endl;
 	std::cout << "---DEEP COPY TEST---" << std::endl;
 	Dog zeus;
+	Animal *catty = new Cat();
 	zeus.think();
 	{
 		Dog tmp(zeus);

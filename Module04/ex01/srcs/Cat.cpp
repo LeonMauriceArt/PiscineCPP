@@ -30,3 +30,13 @@ void Cat::makeSound() const
 {
 	std::cout << "Miiiaaaouu" << std::endl;
 }
+
+void Cat::think()
+{
+	this->brain->setBrain(50, "Je veux un poisson");
+}
+
+void Cat::remember()
+{
+	this->brain->printBrain();
+}

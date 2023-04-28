@@ -23,6 +23,8 @@ int main()
 	WrongCat kitty;
 	kitty.makeSound();
 
+	Animal lll;
+	lll.makeSound();
 	delete(wrong);
 	return 0;
 }
