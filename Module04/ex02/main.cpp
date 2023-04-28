@@ -34,7 +34,8 @@ int main()
 	Dog zeus;
 	zeus.think();
 	{
-		Dog tmp(zeus);
+		Dog tmp;
+		tmp = zeus;
 		tmp.remember();
 	}
 	zeus.remember();
