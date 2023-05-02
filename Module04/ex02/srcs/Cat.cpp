@@ -21,8 +21,9 @@ Cat::Cat(const Cat &other): Animal()
 
 Cat &Cat::operator=(const Cat &other)
 {
+	delete (this->brain);
 	this->type = other.type;
-	*this->brain = *(other.brain);
+	this->brain = new Brain(*other.brain);
 	return (*this);
 }
 
