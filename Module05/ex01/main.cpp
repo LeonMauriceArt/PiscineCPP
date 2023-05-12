@@ -1,15 +1,14 @@
 #include "./includes/Bureaucrat.hpp"
+#include "./includes/Form.hpp"
 
 int main()
 {
 	try
 	{
-		Bureaucrat henry("Henry", 140);
-		for(int i = 0; i < 20; i++)
-		{
-			henry.demotion();
-			std::cout << henry << std::endl;
-		}
+		Form f("MERDE", 140, 140);
+		Bureaucrat Henry("Henry", 120);
+		Henry.signForm(f);
+		Henry.signForm(f);
 	}
 	catch(const std::exception& e)
 	{

@@ -22,7 +22,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other.getName()), _grade(
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 {
 	this->_grade = other.getGrade();
-	return(*this);
+	return (*this);
 }
 
 Bureaucrat::~Bureaucrat()
@@ -59,7 +59,7 @@ void Bureaucrat::demotion()
 	this->_grade++;
 }
 
-const char *Bureaucrat::GradeTooHighException::what() const throw()
+const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return("Grade too High !");
 }
@@ -67,6 +67,28 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
 	return ("Grade too Low !");
+}
+
+void Bureaucrat::signForm(Form &form)
+{
+	if (form.isSigned() == true)
+	{
+		std::cout << this->getName() << " couldn't sign "<< form.getName() << " because it is already signed." << std::endl;
+		return;
+	}
+	else
+	{
+		try
+		{
+			form.beSigned(*this);
+			std::cout << this->getName() << " signed " << form.getName() << std::endl;
+		}
+		catch(Form::GradeTooLowException &e)
+		{
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+			throw(GradeTooLowException());
+		}
+	}
 }
 
 std::ostream &operator<<(std::ostream &out, const Bureaucrat &b)
