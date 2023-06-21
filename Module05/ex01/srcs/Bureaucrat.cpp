@@ -27,7 +27,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat named " << this->getName() << " with grade " << this->getGrade() << " deleted" << std::endl;
+	std::cout << "Bureaucrat named " << this->getName() << " with grade " << this->getGrade() << " deleted." << std::endl;
 }
 
 std::string Bureaucrat::getName() const
@@ -73,7 +73,7 @@ void Bureaucrat::signForm(Form &form)
 {
 	if (form.isSigned() == true)
 	{
-		std::cout << this->getName() << " couldn't sign "<< form.getName() << " because it is already signed." << std::endl;
+		std::cout << this->getName() << " couldn't sign "<< form.getName() << " form, because it is already signed." << std::endl;
 		return;
 	}
 	else
@@ -85,7 +85,7 @@ void Bureaucrat::signForm(Form &form)
 		}
 		catch(Form::GradeTooLowException &e)
 		{
-			std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " form, because " << e.what() << std::endl;
 			throw(GradeTooLowException());
 		}
 	}
