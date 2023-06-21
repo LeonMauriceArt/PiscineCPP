@@ -5,9 +5,9 @@ int main()
 	try
 	{
 		Bureaucrat henry("Henry", 140);
-		for(int i = 0; i < 20; i++)
+		for(int i = 0; i < 141; i++)
 		{
-			henry.demotion();
+			henry.promotion();
 			std::cout << henry << std::endl;
 		}
 	}
