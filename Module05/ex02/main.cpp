@@ -1,14 +1,15 @@
 #include "./includes/Bureaucrat.hpp"
 #include "./includes/Form.hpp"
+#include "./includes/ShrubberyCreationForm.hpp"
 
 int main()
 {
 	try
 	{
-		Form f("MERDE", 140, 140);
+		ShrubberyCreationForm form;
 		Bureaucrat Henry("Henry", 120);
-		Henry.signForm(f);
-		Henry.signForm(f);
+		Henry.signForm(form);
+		Henry.executeForm(form);
 	}
 	catch(const std::exception& e)
 	{

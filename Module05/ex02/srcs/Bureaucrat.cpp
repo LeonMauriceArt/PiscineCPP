@@ -1,4 +1,6 @@
 #include "../includes/Bureaucrat.hpp"
+#include "../includes/Form.hpp"
+
 
 Bureaucrat::Bureaucrat(): _name("Unknown"), _grade(150)
 {
@@ -95,4 +97,16 @@ std::ostream &operator<<(std::ostream &out, const Bureaucrat &b)
 {
 	out << b.getName() << ", bureaucrat grade " << b.getGrade() << ".";
 	return (out); 
+}
+
+void Bureaucrat::executeForm(Form const &form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch(Form::GradeTooLowException &e)
+	{
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+	}
 }

@@ -2,6 +2,7 @@
 #define FORM_HPP
 
 #include <iostream>
+#include <fstream>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
@@ -29,10 +30,11 @@ public:
 	~Form();
 	Form(const Form &other);
 	Form& operator=(const Form &other);
-	virtual void beSigned(const Bureaucrat &b) = 0;
+	void beSigned(const Bureaucrat &b);
 	unsigned int getGradeToSign() const;
 	unsigned int getGradeToExec() const;
 	std::string getName() const;
+	virtual void execute(Bureaucrat const &executor) const = 0;
 	bool isSigned() const;
 };
 
