@@ -1,18 +1,17 @@
 #include "../includes/Form.hpp"
 #include "../includes/Bureaucrat.hpp"
 
-Form::Form() : _name("Default Form"), _signed(false), _gradeToSign(150), _gradeToExec(150)
+Form::Form() : _name("Default Form"), _gradeToSign(150), _gradeToExec(150)
 {
+	this->_signed = false;
 	std::cout << "Default form created with grade to exec " << this->getGradeToExec() \
 		<< " and grade to sign " << this->getGradeToSign() << "." << std::endl;
 }
 
-Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _name(name), _gradeToSign(gradeSign),_gradeToExec(gradeExec) 
+Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _name(name), _signed(false), _gradeToSign(gradeSign), _gradeToExec(gradeExec)
 {
 	if (gradeExec > 150 || gradeSign > 150)
-		throw(GradeTooLowException(			std::cout << "Intern creates shrubbery creation form";
-			std::cout << "Intern creates shrubbery creation form";
-));
+		throw(GradeTooLowException());
 	if (gradeExec < 1 || gradeSign < 1)
 		throw(GradeTooHighException());
 	std::cout << "Form named "<< this->getName() << " created with grade to exec " << this->getGradeToExec()
@@ -22,7 +21,7 @@ Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _
 Form::~Form()
 {
 	std::cout << "Form named " << this->getName() << " with grade to exec " << this->getGradeToExec()
-			  << " and grade to sign " << this->getGradeToSign() << " deleted." << std::endl;
+			  << " and grade to sign " << this->getGradeToSign() << " destructed." << std::endl;
 }
 
 Form::Form(const Form &other) : _name(other._name), _gradeToSign(other._gradeToSign), _gradeToExec(other._gradeToExec)
@@ -77,12 +76,12 @@ std::string Form::getName() const
 
 const char *Form::GradeTooHighException::what() const throw()
 {
-	return ("Grade too high for form.");
+	return ("grade too high for form.");
 }
 
 const char *Form::GradeTooLowException::what() const throw()
 {
-	return("Grade too low for form.");
+	return("grade too low for form.");
 }
 
 std::ostream &operator<<(std::ostream &out, const Form &f)
@@ -96,3 +95,7 @@ std::ostream &operator<<(std::ostream &out, const Form &f)
 	return (out);
 }
 
+void	Form::execute(Bureaucrat const &executor) const
+{
+	(void)executor;
+}

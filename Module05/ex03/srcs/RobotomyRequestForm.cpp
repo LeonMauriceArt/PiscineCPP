@@ -28,7 +28,6 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "LOL" << std::endl;
 }
 
 std::string RobotomyRequestForm::get_target(void) const
