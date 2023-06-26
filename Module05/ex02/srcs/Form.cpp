@@ -8,7 +8,7 @@ Form::Form() : _name("Default Form"), _gradeToSign(150), _gradeToExec(150)
 		<< " and grade to sign " << this->getGradeToSign() << "." << std::endl;
 }
 
-Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _name(name), _gradeToSign(gradeSign),_gradeToExec(gradeExec) 
+Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _name(name), _signed(false), _gradeToSign(gradeSign), _gradeToExec(gradeExec)
 {
 	if (gradeExec > 150 || gradeSign > 150)
 		throw(GradeTooLowException());

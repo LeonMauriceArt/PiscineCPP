@@ -4,7 +4,7 @@ int main()
 {
 	try
 	{
-		Bureaucrat henry("Henry", 140);
+		Bureaucrat henry("Henry", 155);
 		for(int i = 0; i < 141; i++)
 		{
 			henry.promotion();

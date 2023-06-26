@@ -3,22 +3,25 @@
 #include "../includes/Bureaucrat.hpp"
 
 
-ShrubberyCreationForm::ShrubberyCreationForm() : Form("Default Shrubbery Form", 137, 145), _target("Default target")
+ShrubberyCreationForm::ShrubberyCreationForm() : Form("Default Shrubbery Form", _baseGradeExec, _baseGradeSign), _target("Default target")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) : Form(name, 137, 145), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other) : Form(other.getName(), 137, 145), _target(other.get_target())
+ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &other) : Form(other), _target(other.get_target())
 {
 
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other)
 {
+	if (this == &other)
+		return(*this);
 	this->_target = other.get_target();
+	Form::operator=(other);
 	return (*this);
 }
 
@@ -38,13 +41,13 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		throw(GradeTooLowException());
 	std::string filename = this->get_target() + "_shrubbery";
 	std::ofstream File(filename.c_str());
-	File << "       ^       \n";
+	File << "      -X-      \n";
 	File << "      / \\      \n";
 	File << "     /   \\     \n";
-	File << "    /     \\    \n";
-	File << "   /       \\   \n";
-	File << "  /         \\  \n";
-	File << " /___________\\ \n";
+	File << "    / *   \\    \n";
+	File << "   /     * \\   \n";
+	File << "  /   *     \\  \n";
+	File << " /_*_________\\ \n";
 	File << "       |       \n";
-	File << "       |       \n";
+	File << "   [+] |  [+]  \n";
 }

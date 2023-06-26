@@ -2,11 +2,15 @@ NAME        =	bureaucrat
 
 INC			=	includes/Bureaucrat.hpp \
 				includes/Form.hpp \
-				includes/ShrubberyCreationForm.hpp
+				includes/ShrubberyCreationForm.hpp \
+				includes/PresidentialPardonForm.hpp \
+				includes/RobotomyRequestForm.hpp
  
 SRCS        =   srcs/Bureaucrat.cpp \
 				srcs/Form.cpp \
 				srcs/ShrubberyCreationForm.cpp \
+				srcs/PresidentialPardonForm.cpp \
+				srcs/RobotomyRequestForm.cpp \
 				main.cpp
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
