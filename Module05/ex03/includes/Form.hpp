@@ -25,6 +25,11 @@ class Form
 			public:
 				virtual const char *what() const throw();
 		};
+		class IsNotSignedException : public std::exception
+		{
+			public:
+				virtual const char *what() const throw();
+		};
 		Form();
 		Form(std::string name, unsigned int gradeExec, unsigned int gradeSign);
 		virtual ~Form();

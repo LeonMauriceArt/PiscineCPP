@@ -28,7 +28,6 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm &o
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
-	std::cout << "LOL" << std::endl;
 }
 
 std::string RobotomyRequestForm::get_target(void) const
@@ -38,6 +37,8 @@ std::string RobotomyRequestForm::get_target(void) const
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
+	if (!(this->isSigned()))
+		throw(IsNotSignedException());
 	if (executor.getGrade() > this->getGradeToExec())
 		throw(GradeTooLowException());
 	srand(time(NULL));

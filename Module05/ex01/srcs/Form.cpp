@@ -10,9 +10,7 @@ Form::Form() : _name("Default Form"), _signed(false), _gradeToSign(150), _gradeT
 Form::Form(std::string name, unsigned int gradeExec, unsigned int gradeSign) : _name(name), _gradeToSign(gradeSign),_gradeToExec(gradeExec) 
 {
 	if (gradeExec > 150 || gradeSign > 150)
-		throw(GradeTooLowException(			std::cout << "Intern creates shrubbery creation form";
-			std::cout << "Intern creates shrubbery creation form";
-));
+		throw(GradeTooLowException());
 	if (gradeExec < 1 || gradeSign < 1)
 		throw(GradeTooHighException());
 	std::cout << "Form named "<< this->getName() << " created with grade to exec " << this->getGradeToExec()
