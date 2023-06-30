@@ -21,6 +21,7 @@ int main()
 		ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
 		randomForm = rrf;
 		man->executeForm(*randomForm);
+		man->signForm(*randomForm);
 		delete(rrf);
 		delete(scf);
 		delete(ppf);

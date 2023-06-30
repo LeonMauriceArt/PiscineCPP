@@ -19,7 +19,6 @@ int	Intern::whatForm(std::string form)
 	std::string forms[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
 	for (int i = 0; i <= 3; i++)
 	{
-		std::cout << i << std::endl;
 		if (form.compare(forms[i]) == 0)
 			return (i);
 	}
