@@ -9,7 +9,7 @@ RobotomyRequestForm::RobotomyRequestForm() : Form("Default Robotomy Form", _base
 {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : Form("Robotomy request form", _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 

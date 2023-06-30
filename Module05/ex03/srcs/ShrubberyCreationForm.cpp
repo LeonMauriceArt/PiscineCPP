@@ -7,7 +7,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : Form("Default Shrubbery Form", 
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery creation form", _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 

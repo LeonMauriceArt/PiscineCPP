@@ -31,13 +31,13 @@ Form *Intern::makeForm(std::string form, std::string target)
 	{
 		case 0:
 			std::cout << "Intern creates presidential pardon form" << std::endl;
-			return (new PresidentialPardonForm(form, target));
+			return (new PresidentialPardonForm(target));
 		case 1:
 			std::cout << "Intern creates robotomy request form" << std::endl;
-			return (new RobotomyRequestForm(form, target));
+			return (new RobotomyRequestForm(target));
 		case 2:
 			std::cout << "Intern creates shrubbery creation form" << std::endl;
-			return (new ShrubberyCreationForm(form, target));
+			return (new ShrubberyCreationForm(target));
 		default:
 			std::cout << "The Intern could not create " << form << " form, because it is unknown" << std::endl;
 	}

@@ -6,7 +6,7 @@ PresidentialPardonForm::PresidentialPardonForm() : Form("Default Presidential Fo
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("Presidential pardon form", _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 
