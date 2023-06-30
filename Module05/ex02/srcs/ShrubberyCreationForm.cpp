@@ -7,7 +7,7 @@ ShrubberyCreationForm::ShrubberyCreationForm() : Form("Default Shrubbery Form", 
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : Form("Shrubbery creation form", _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 
@@ -41,6 +41,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 		throw(IsNotSignedException());
 	if (executor.getGrade() > this->getGradeToExec())
 		throw(GradeTooLowException());
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 	std::string filename = this->get_target() + "_shrubbery";
 	std::ofstream File(filename.c_str());
 	File << "      -X-      \n";

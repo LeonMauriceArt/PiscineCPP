@@ -6,7 +6,7 @@ PresidentialPardonForm::PresidentialPardonForm() : Form("Default Presidential Fo
 {
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string name, std::string target) : Form(name, _baseGradeExec, _baseGradeSign), _target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target) : Form("Presidential pardon form", _baseGradeExec, _baseGradeSign), _target(target)
 {
 }
 
@@ -38,5 +38,6 @@ void PresidentialPardonForm::execute(Bureaucrat const &executor) const
 		throw(IsNotSignedException());
 	if (executor.getGrade() > this->getGradeToExec())
 		throw(GradeTooLowException());
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 	std::cout << _target << " has been pardoned by Zaphod Beeblebrox." << std::endl; 
 }

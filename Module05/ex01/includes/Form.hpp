@@ -28,7 +28,7 @@ public:
 	~Form();
 	Form(const Form &other);
 	Form& operator=(const Form &other);
-	void beSigned(const Bureaucrat &b);
+	void beSigned(const Bureaucrat &bureaucrat);
 	unsigned int getGradeToSign() const;
 	unsigned int getGradeToExec() const;
 	std::string getName() const;

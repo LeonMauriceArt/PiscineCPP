@@ -14,7 +14,7 @@ class PresidentialPardonForm : public Form
 
 	public:
 		PresidentialPardonForm();
-		PresidentialPardonForm(std::string name, std::string target);
+		PresidentialPardonForm(std::string target);
 		PresidentialPardonForm(PresidentialPardonForm const &copy);
 		PresidentialPardonForm &operator=(PresidentialPardonForm const &ref);
 		~PresidentialPardonForm();

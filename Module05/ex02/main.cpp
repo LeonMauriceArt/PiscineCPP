@@ -8,9 +8,9 @@ int main()
 {
 	try
 	{
-		RobotomyRequestForm robotform("Robotomizing private Brian", "Brian");
-		PresidentialPardonForm presidentialform("Galactic pardon", "Vador");
-		Bureaucrat Henry("Henry", 155);
+		RobotomyRequestForm robotform("Brian");
+		PresidentialPardonForm presidentialform("Vador");
+		Bureaucrat Henry("Henry", 1);
 		Henry.signForm(robotform);
 		Henry.executeForm(robotform);
 		Henry.signForm(presidentialform);

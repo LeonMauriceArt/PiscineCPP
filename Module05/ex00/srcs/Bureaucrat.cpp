@@ -11,12 +11,12 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : _name(name), _gra
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
-	std::cout << "Bureaucrat named " << this->getName() << " created with grade " << this->getGrade() << std::endl;
+	std::cout << "Bureaucrat named " << this->getName() << " created with grade " << this->getGrade() << "." << std::endl;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other): _name(other.getName()), _grade(other.getGrade())
 {
-	std::cout << "Bureaucrat named " << this->getName() << " created with grade " << this->getGrade() << std::endl;
+	std::cout << "Bureaucrat named " << this->getName() << " created with grade " << this->getGrade() << "." << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other)

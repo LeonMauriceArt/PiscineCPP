@@ -41,6 +41,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 		throw(IsNotSignedException());
 	if (executor.getGrade() > this->getGradeToExec())
 		throw(GradeTooLowException());
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 	srand(time(NULL));
 	std::cout << "*Drill noises*" << std::endl;
 	int random = rand() % 2;
