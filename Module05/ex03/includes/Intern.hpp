@@ -9,7 +9,9 @@ class Form;
 class Intern
 {
 	private:
-		int whatForm(std::string form);
+		Form *CreateShrubbery(std::string target);
+		Form *CreatePresidential(std::string target);
+		Form *CreateRobotomy(std::string target);
 	public:
 		Intern();
 		~Intern();

@@ -14,19 +14,19 @@ Intern::~Intern()
 	std::cout << "Intern destroyed." << std::endl;
 }
 
-int	Intern::whatForm(std::string form)
-{
-	std::string forms[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
-	for (int i = 0; i <= 3; i++)
-	{
-		if (form.compare(forms[i]) == 0)
-			return (i);
-	}
-	return (-1);
-}
-
 Form *Intern::makeForm(std::string form, std::string target)
 {
+	std::string forms[3] = {
+		"presidential pardon", 
+		"robotomy request", 
+		"shrubbery creation"
+	};
+	void(Intern::*ptr_func[3])(void)={
+		Intern::CreatePresidential(target),
+		Intern::CreateRobotomy(target),
+		Intern::CreateShrubbery(target)
+	}
+
 	switch (whatForm(form))
 	{
 		case 0:

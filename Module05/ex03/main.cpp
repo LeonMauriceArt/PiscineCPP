@@ -12,18 +12,15 @@ int main()
 		Intern someRandomIntern;
 		Bureaucrat *man = new Bureaucrat("Henry", 40);
 		Form *rrf;
-		Form *scf;
 		Form *ppf;
 		Form *randomForm;
 
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		scf = someRandomIntern.makeForm("shrubbery creation", "Bender");
 		ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
 		randomForm = rrf;
-		man->executeForm(*randomForm);
-		man->signForm(*randomForm);
+		// man->signForm(*randomForm);
+		// man->executeForm(*randomForm);
 		delete(rrf);
-		delete(scf);
 		delete(ppf);
 		delete(man);
 	}
