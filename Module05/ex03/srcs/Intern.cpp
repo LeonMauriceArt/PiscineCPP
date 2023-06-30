@@ -3,6 +3,9 @@
 #include "../includes/ShrubberyCreationForm.hpp"
 #include "../includes/PresidentialPardonForm.hpp"
 #include "../includes/RobotomyRequestForm.hpp"
+#include <string>
+
+typedef Form *(Intern::*ptr_func)(std::string);
 
 Intern::Intern()
 {
@@ -14,6 +17,24 @@ Intern::~Intern()
 	std::cout << "Intern destroyed." << std::endl;
 }
 
+Form *Intern::CreatePresidential(std::string target)
+{
+	std::cout << "Intern creates presidential pardon form." << std::endl;
+	return(new PresidentialPardonForm(target));
+}
+
+Form *Intern::CreateRobotomy(std::string target)
+{
+	std::cout << "Intern creates robotomy request form." << std::endl;
+	return(new RobotomyRequestForm(target));
+}
+
+Form *Intern::CreateShrubbery(std::string target)
+{
+	std::cout << "Intern creates shrubbery creation form." << std::endl;
+	return(new ShrubberyCreationForm(target));
+}
+
 Form *Intern::makeForm(std::string form, std::string target)
 {
 	std::string forms[3] = {
@@ -21,25 +42,15 @@ Form *Intern::makeForm(std::string form, std::string target)
 		"robotomy request", 
 		"shrubbery creation"
 	};
-	void(Intern::*ptr_func[3])(void)={
-		Intern::CreatePresidential(target),
-		Intern::CreateRobotomy(target),
-		Intern::CreateShrubbery(target)
-	}
-
-	switch (whatForm(form))
+	ptr_func functions[3]={
+		&Intern::CreatePresidential,
+		&Intern::CreateRobotomy,
+		&Intern::CreateShrubbery
+	};
+	for(int i = 0; i < 3; i++)
 	{
-		case 0:
-			std::cout << "Intern creates presidential pardon form" << std::endl;
-			return (new PresidentialPardonForm(target));
-		case 1:
-			std::cout << "Intern creates robotomy request form" << std::endl;
-			return (new RobotomyRequestForm(target));
-		case 2:
-			std::cout << "Intern creates shrubbery creation form" << std::endl;
-			return (new ShrubberyCreationForm(target));
-		default:
-			std::cout << "The Intern could not create " << form << " form, because it is unknown" << std::endl;
+		if (form == forms[i])
+			return((this->*functions[i])(target));
 	}
 	return (NULL);
 }

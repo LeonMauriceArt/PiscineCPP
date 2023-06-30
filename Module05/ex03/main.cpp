@@ -18,8 +18,8 @@ int main()
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 		ppf = someRandomIntern.makeForm("presidential pardon", "Bender");
 		randomForm = rrf;
-		// man->signForm(*randomForm);
-		// man->executeForm(*randomForm);
+		man->executeForm(*randomForm);
+		man->signForm(*randomForm);
 		delete(rrf);
 		delete(ppf);
 		delete(man);
