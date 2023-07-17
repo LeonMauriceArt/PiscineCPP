@@ -1,0 +1,3 @@
+Il faut faire un meilleur checking sur les overflows de int float et double, 
+et regler les cas ou un overflow d'int produit une mauvaise conversion pour float et double,
+et vice versa 
