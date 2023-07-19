@@ -1,4 +1,4 @@
-NAME        =	serialize
+NAME        =	identify
 
 SRCS 		=	 $(shell find -name '*.cpp')
 

@@ -3,9 +3,11 @@
 #include "./includes/B.hpp"
 #include "./includes/C.hpp"
 
+#include <cstddef>
 #include <time.h>
 #include <iostream>
 #include <stdlib.h>
+#include <typeinfo>
 
 Base::~Base()
 {
@@ -38,14 +40,38 @@ void identify(Base *p)
 		std::cout << "Error : object has no type" << std::endl;
 }
 
-// void identify(Base &p)
-// {
-
-// }
+void identify(Base &p)
+{
+	try 
+	{
+		A &testA = dynamic_cast<A&>(p);	
+		std::cout << "Object is of A type" << std::endl;
+	}
+	catch (std::bad_cast) 
+	{
+	}
+	try 
+	{
+		B &testB = dynamic_cast<B&>(p);
+		std::cout << "Object is of B type" << std::endl;
+	}
+	catch (std::bad_cast) 
+	{
+	}
+	try 
+	{
+		C &testC = dynamic_cast<C&>(p);
+		std::cout << "Object is of C type" << std::endl;
+	}
+	catch (std::bad_cast) 
+	{
+	}
+}
 
 int main(void)
 {
 	Base *test = generate();
+	identify(*test);
 	identify(test);
 	return (0);
 }
