@@ -4,14 +4,18 @@
 #include <cstddef>
 #include <iostream>
 
-typedef void (*fun_ptr)();
 
-template <typename T> void iter(T *tab, std::size_t N, void (*function)(T &))
+template <typename T> void iter(T *tab, std::size_t N, void (*function)(const T &))
 {
 	if (tab == NULL || function == NULL)
 		return;
 	for(size_t i = 0; i < N; i++)
 		function(tab[i]);
+}
+
+template <typename T> void print(const T value)
+{
+	std::cout << value << std::endl;
 }
 
 #endif

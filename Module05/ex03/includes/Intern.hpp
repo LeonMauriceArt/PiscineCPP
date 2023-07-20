@@ -14,6 +14,8 @@ class Intern
 		Form *CreateRobotomy(std::string target);
 	public:
 		Intern();
+		Intern(const Intern &other);
+		Intern& operator=(const Intern &other);
 		~Intern();
 		Form *makeForm(std::string form, std::string target);
 };

@@ -12,6 +12,18 @@ Intern::Intern()
 	std::cout << "New Intern created." << std::endl;
 }
 
+Intern::Intern(const Intern &other)
+{
+	(void)other;
+	std::cout << "New Intern created by copy." << std::endl;
+}
+
+Intern &Intern::operator=(const Intern &other)
+{
+	(void)other;
+	return (*this);
+}
+
 Intern::~Intern()
 {
 	std::cout << "Intern destroyed." << std::endl;
