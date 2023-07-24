@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <ios>
 #include <limits>
+#include <sstream>
 #include <string>
 
 bool ScalarConverter::isInteger(const std::string &litteral)
@@ -43,7 +44,7 @@ bool ScalarConverter::isDouble(const std::string &litteral)
 		return (false);
 }
 
-void ScalarConverter::displayResult(char cvalue, int ivalue, float fvalue, double dvalue, std::string &litteral)
+void ScalarConverter::displayResult(char cvalue, int ivalue, float fvalue, double dvalue)
 {
 	if (ivalue >= std::numeric_limits<unsigned char>::min() && ivalue <= std::numeric_limits<char>::max())
 	{
@@ -86,21 +87,36 @@ void ScalarConverter::convertChar(std::string &litteral)
 	int ivalue = static_cast<int>(cvalue);
 	float fvalue = static_cast<float>(cvalue);
 	double dvalue = static_cast<double>(cvalue);
-	displayResult(cvalue, ivalue, fvalue, dvalue, litteral);
+	displayResult(cvalue, ivalue, fvalue, dvalue);
 }
 
 void ScalarConverter::convertInt(std::string &litteral)
 {
-	int ivalue = std::atoi(litteral.c_str());
-	char cvalue = static_cast<char>(ivalue);
-	float fvalue = static_cast<float>(ivalue);
-	double dvalue = static_cast<double>(ivalue);
-	long long check = atof(litteral.c_str());
-	if (check < std::numeric_limits<int>::min())
-		ivalue = std::numeric_limits<int>::min();
-	if (check > std::numeric_limits<int>::max())
+	bool intover = false;
+	std::stringstream stream(litteral);
+	long double value;
+	stream >> value;
+	int ivalue;
+	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::min())
+	{
 		ivalue = std::numeric_limits<int>::max();
-	displayResult(cvalue, ivalue, fvalue, dvalue, litteral);
+		intover = true;
+	}
+	else
+	 	ivalue = std::atoi(litteral.c_str());
+	char cvalue = static_cast<char>(ivalue);
+	float fvalue;
+	double dvalue;
+	if (intover == false)
+	{
+		fvalue = static_cast<float>(ivalue);
+		dvalue = static_cast<double>(ivalue);
+	}
+	else {
+		fvalue = static_cast<float>(value);
+		dvalue = static_cast<double>(value);
+	}
+	displayResult(cvalue, ivalue, fvalue, dvalue);
 }
 
 void ScalarConverter::convertFloat(std::string &litteral)
@@ -109,7 +125,7 @@ void ScalarConverter::convertFloat(std::string &litteral)
 	char cvalue = static_cast<char>(fvalue);
 	int ivalue = static_cast<int>(fvalue);
 	double dvalue = static_cast<double>(fvalue);
-	displayResult(cvalue, ivalue, fvalue, dvalue, litteral);
+	displayResult(cvalue, ivalue, fvalue, dvalue);
 }
 
 void ScalarConverter::convertDouble(std::string &litteral)
@@ -118,32 +134,28 @@ void ScalarConverter::convertDouble(std::string &litteral)
 	float fvalue = static_cast<float>(dvalue);
 	char cvalue = static_cast<char>(dvalue);
 	int ivalue = static_cast<int>(dvalue);
-	displayResult(cvalue, ivalue, fvalue, dvalue, litteral);
+	displayResult(cvalue, ivalue, fvalue, dvalue);
 }
 
 void ScalarConverter::convert(std::string litteral)
 {
 	if ((litteral.length() == 3 && litteral[0] == '\'' && litteral[2] == '\'') || (litteral.length() == 1 && !std::isdigit(litteral[0])))
     {
-        std::cout << "litteral is a character" << std::endl;
 		convertChar(litteral);
 		return;
     }
 	else if(isInteger(litteral))
 	{
-		std::cout << "litteral is an integer" << std::endl;
 		convertInt(litteral);
 		return;
 	}
 	else if(isFloat(litteral))
 	{
-		std::cout << "litteral is a float" << std::endl;
 		convertFloat(litteral);
 		return;
 	}
 	else if (isDouble(litteral))
 	{
-		std::cout << "litteral is a double" << std::endl;
 		convertDouble(litteral);
 		return;
 	}

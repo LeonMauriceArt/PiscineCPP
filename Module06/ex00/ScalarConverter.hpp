@@ -8,6 +8,7 @@
 class ScalarConverter
 {
     private:
+		char type;
 		ScalarConverter();
 		~ScalarConverter();
 		ScalarConverter(const ScalarConverter &other);
@@ -19,7 +20,7 @@ class ScalarConverter
 		static void convertInt(std::string &litteral);
 		static void convertFloat(std::string &litteral);
 		static void convertDouble(std::string &litteral);
-		static void displayResult(char cvalue, int ivalue, float fvalue, double dvalue, std::string &litteral);
+		static void displayResult(char cvalue, int ivalue, float fvalue, double dvalue);
 	public:
 		static void convert(std::string litteral);
 };
