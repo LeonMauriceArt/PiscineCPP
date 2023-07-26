@@ -1,8 +1,6 @@
 #include "ScalarConverter.hpp"
-#include <cctype>
 #include <cstdlib>
 #include <iomanip>
-#include <ios>
 #include <limits>
 #include <sstream>
 #include <string>
@@ -70,7 +68,9 @@ void ScalarConverter::displayResult(char cvalue, int ivalue, float fvalue, doubl
 	if (dvalue == std::numeric_limits<double>::infinity())
 		std::cout << "double: " << std::numeric_limits<double>::infinity() << std::endl;
 	else if (dvalue == -std::numeric_limits<double>::infinity())
+	{
 		std::cout << "double: " << -std::numeric_limits<double>::infinity() << std::endl;
+	}
 	else if (dvalue == std::numeric_limits<double>::quiet_NaN())
 		std::cout << "double: " << std::numeric_limits<double>::quiet_NaN() << std::endl;
 	else
@@ -121,10 +121,33 @@ void ScalarConverter::convertInt(std::string &litteral)
 
 void ScalarConverter::convertFloat(std::string &litteral)
 {
+	bool floatover = false;
+	std::stringstream stream(litteral);
+	long double value;
+	stream >> value;
 	float fvalue = std::atof(litteral.c_str());
+	if (value > std::numeric_limits<float>::max() || value < std::numeric_limits<float>::min())
+	{
+		if (value >= std::numeric_limits<float>::max())
+			fvalue = std::numeric_limits<float>::infinity();
+		else if (fvalue < std::numeric_limits<float>::min())
+			fvalue = -std::numeric_limits<float>::infinity();
+		floatover = true;
+	}
+	else
+	 	fvalue = std::atof(litteral.c_str());
+	int ivalue;
 	char cvalue = static_cast<char>(fvalue);
-	int ivalue = static_cast<int>(fvalue);
-	double dvalue = static_cast<double>(fvalue);
+
+	if (value > std::numeric_limits<int>::max() || value < std::numeric_limits<int>::max())
+	 	ivalue = std::numeric_limits<int>::max();
+	else
+		ivalue = static_cast<int>(fvalue);
+	double dvalue;
+	if (floatover == true)
+		dvalue = static_cast<double>(value);
+	else
+	 	dvalue = static_cast<double>(fvalue);
 	displayResult(cvalue, ivalue, fvalue, dvalue);
 }
 
