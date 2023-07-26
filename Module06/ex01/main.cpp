@@ -20,4 +20,5 @@ int main(void)
 	other = Serializer::deserialize(serialize);
 	std::cout << "---Deserializing Data---" << std::endl; 
 	std::cout << "other message = " << other->message << std::endl;
+	delete(mymessage);
 }
