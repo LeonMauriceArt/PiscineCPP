@@ -24,12 +24,14 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
+
 template <typename T>
 class Array
 {
 	private:
 		T *_tab;
 		unsigned int _size;
+		T _defaultValue;
 	public:
 		class OutOfArray: public std::exception
 		{
@@ -38,14 +40,16 @@ class Array
 					return ("Error : Out of array !");
 				}
 		};
-		Array(): _size(0){
+		Array(): _size(0), _defaultValue(T()){
 			this->_tab = new T();
 		}
-		Array(unsigned int n): _size(n)
+		Array(unsigned int n): _size(n), _defaultValue(T())
 		{
 			this->_tab = new T[n];
+			for (unsigned int i = 0; i < _size; i++)
+				this->_tab[i] = _defaultValue;
 		}			
-		Array(const Array &other): _size(other.size())
+		Array(const Array &other): _size(other.size()), _defaultValue(T())
 		{
 			if (other._tab)
 			{
@@ -58,8 +62,10 @@ class Array
 		}
 		Array &operator=(const Array &other)
 		{
+			if (this == &other)
+				return *this;
 			if (this->_tab)
-				delete(this->_tab);
+				delete[](this->_tab);
 			if (other._tab)
 			{
 				this->_size = other.size();
@@ -77,7 +83,7 @@ class Array
 		~Array()
 		{
 			if (this->_tab)
-			delete(this->_tab);
+				delete[](this->_tab);
 		}
 		unsigned int size() const
 		{
@@ -87,20 +93,20 @@ class Array
 		{
 			try 
 			{
-				if (index < 0 || index > _size)
+				if (index < 0 || index >= _size)
 					throw OutOfArray();
 				return (_tab[index]);
 			} 
 			catch (std::exception &e) 
 			{
 				std::cout << RED << e.what() << RESET << std::endl;
-				return _tab[0];
+				return _defaultValue;
 			}
 		}
 		void displayArray()
 		{
 			for(unsigned int i = 0; i < _size; i++)
-				std::cout << _tab[i] << std::endl;
+				std::cout << GREEN << "Array " << i << " = " << YELLOW << _tab[i] << RESET << std::endl;
 		}
 };
 

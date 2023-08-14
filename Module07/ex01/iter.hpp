@@ -5,6 +5,14 @@
 #include <iostream>
 
 
+template <typename T> void iter(T *tab, std::size_t N, void (*function)(T &))
+{
+	if (tab == NULL || function == NULL)
+		return;
+	for(size_t i = 0; i < N; i++)
+		function(tab[i]);
+}
+
 template <typename T> void iter(T *tab, std::size_t N, void (*function)(const T &))
 {
 	if (tab == NULL || function == NULL)
@@ -13,7 +21,7 @@ template <typename T> void iter(T *tab, std::size_t N, void (*function)(const T 
 		function(tab[i]);
 }
 
-template <typename T> void print(const T value)
+template <typename T> void templateprint(const T value)
 {
 	std::cout << value << std::endl;
 }
