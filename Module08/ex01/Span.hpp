@@ -48,7 +48,7 @@ class Span
 		void addNumber(unsigned int number);
 		unsigned int shortestSpan() const;
 		unsigned int longestSpan() const;
-
+		void	addRange(std::list<int>::iterator start, std::list<int>::iterator end);
 };
 
 #endif

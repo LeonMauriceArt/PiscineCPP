@@ -3,7 +3,6 @@
 #include <cmath>
 #include <exception>
 #include <iterator>
-#include <limits.h>
 #include <limits>
 #include <list>
 
@@ -52,22 +51,18 @@ unsigned int Span::shortestSpan() const
 	{
 		if (numbers.empty() == 1 || numbers.size() == 1)
 			throw cannotGetDistance();
-		std::list<int>::const_iterator iter = numbers.begin();
-		for(; iter != numbers.end(); ++iter)
-		{
-			for (std::list<int>::const_iterator niter = numbers.begin(); niter != numbers.end(); ++niter)
-			{
-				if (iter != niter)
-				{
-					unsigned int curr_dist = abs(abs(*niter) - abs(*iter));
-					min_dist = std::min(min_dist, curr_dist);
-				}
-			}
-		}
-	} catch (std::exception &e) 
+	} 
+	catch (std::exception &e) 
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 		return 0;
+	}
+	std::list<int> sorted = numbers;
+	sorted.sort();
+	for(std::list<int>::iterator iter = sorted.begin(), next = iter++; iter != sorted.end() && next != sorted.end(); ++iter, ++next)
+	{
+		unsigned int current_dist = abs(*iter - *next);
+		min_dist = std::min(min_dist, current_dist);
 	}
 	return min_dist;
 }
@@ -96,4 +91,18 @@ const char *Span::classSpanFull::what() const throw()
 const char *Span::cannotGetDistance::what() const throw()
 {
 	return ("Error: cannot get a valid distance in the class Span.");
+}
+
+void Span::addRange(std::list<int>::iterator start, std::list<int>::iterator end)
+{
+	try
+	{
+		std::list<int>::iterator iter = start;
+		for(; iter != end; ++iter)
+			addNumber(*iter);
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
 }
