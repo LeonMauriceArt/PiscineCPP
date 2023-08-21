@@ -1,4 +1,4 @@
-NAME        =	mutantstack
+NAME        =	easyfind
 
 SRCS 		=	 $(shell find -name '*.cpp')
 

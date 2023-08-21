@@ -1,4 +1,4 @@
-NAME        =	mutantstack
+NAME        =	btc
 
 SRCS 		=	 $(shell find -name '*.cpp')
 

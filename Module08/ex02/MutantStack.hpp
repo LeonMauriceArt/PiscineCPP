@@ -19,25 +19,37 @@
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 
-#include <stack>
-#include <algorithm>
 #include <iostream>
 #include <list>
 #include <stdlib.h>
+#include <stack>
+#include <algorithm>
 #include <iterator>
+#include <deque>
 
-template <typename T> 
+template <typename T, class container=std::deque<T> > 
 class MutantStack : public std::stack<T>
 {
 	public:
+		typedef typename container::iterator iterator;
+		typedef std::reverse_iterator<T> reverse_iterator;
+
 		MutantStack() : std::stack<T>() {};
 		~MutantStack() {};
 		MutantStack(const MutantStack &other) : std::stack<T>(other){};
 		MutantStack &operator=(const MutantStack &other)
 		{
-			std::stack<T> copy(other);
-			this
+			if (this != &other)
+			{
+				std::stack<T> copy(other);
+				std::swap(copy, this->c);
+			}
+			return *this;
 		}
+		iterator begin() { return this->c.begin();}
+		iterator end() { return this->c.end();}
+		reverse_iterator rbegin() { return reverse_iterator(this->crbegin());}
+		reverse_iterator rend() { return reverse_iterator(this->crend());}
 };
 
 #endif
