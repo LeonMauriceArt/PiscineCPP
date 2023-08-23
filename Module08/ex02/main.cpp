@@ -24,33 +24,38 @@ void mutantTest()
 		std::cout << *it << std::endl;
 		++it;
 	}
-	MutantStack<int> s;
-	s = mstack;
-	MutantStack<int>::iterator iit = s.begin();
-	MutantStack<int>::iterator iti = s.end();
-	while (iit != iti)
 	{
-		std::cout << *iit << std::endl;
-		++iit;
+		MutantStack<int> s;
+		s = mstack;
+		MutantStack<int>::iterator iit = s.begin();
+		MutantStack<int>::iterator iti = s.end();
+		while (iit != iti)
+		{
+			std::cout << *iit << std::endl;
+			++iit;
+		}
 	}
+	MutantStack<int>::iterator po = mstack.begin();
+	po++;
+	std::cout << *po << std::endl;
 }
 
 void listTest()
 {
-	std::list<int> mstack;
-	mstack.push_back(5);
-	mstack.push_back(17);
-	std::list<int>::iterator iter = mstack.begin();
+	std::list<int> mlist;
+	mlist.push_back(5);
+	mlist.push_back(17);
+	std::list<int>::iterator iter = mlist.begin();
 	iter++;
 	std::cout << YELLOW << "top should be = " << *iter << RESET << std::endl;
-	mstack.remove(17);
-	std::cout << YELLOW << "size = " << mstack.size() << RESET << std::endl;
-	mstack.push_back(3);
-	mstack.push_back(5);
-	mstack.push_back(737);
-	mstack.push_back(0);
-	std::list<int>::iterator it = mstack.begin();
-	std::list<int>::iterator ite = mstack.end();
+	mlist.remove(17);
+	std::cout << YELLOW << "size = " << mlist.size() << RESET << std::endl;
+	mlist.push_back(3);
+	mlist.push_back(5);
+	mlist.push_back(737);
+	mlist.push_back(0);
+	std::list<int>::iterator it = mlist.begin();
+	std::list<int>::iterator ite = mlist.end();
 	++it;
 	--it;
 	std::cout << YELLOW << "---displaying list from begin to end---" << RESET << std::endl;
@@ -59,13 +64,15 @@ void listTest()
 		std::cout << *it << std::endl;
 		++it;
 	}
-	std::list<int> s(mstack);
+	std::list<int> s(mlist);
 }
 
 int main()
 {
+	std::cout << BOLDGREEN << "---STARTING MUTANTTEST---" << RESET << std::endl;
 	mutantTest();
-	std::cout << "-----" << std::endl;
+	std::cout << BOLDYELLOW << "---END OF MUTANTTEST---" << RESET << std::endl;
+	std::cout << BOLDGREEN << "---STARTING LISTTEST---" << RESET << std::endl;
 	listTest();
 	return (0);
 }

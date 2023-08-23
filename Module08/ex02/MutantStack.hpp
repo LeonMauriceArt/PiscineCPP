@@ -39,11 +39,8 @@ class MutantStack : public std::stack<T>
 		MutantStack(const MutantStack &other) : std::stack<T>(other){};
 		MutantStack &operator=(const MutantStack &other)
 		{
-			if (this != &other)
-			{
-				std::stack<T> copy(other);
-				std::swap(copy, this->c);
-			}
+			if (*this != other)
+				std::stack<T>::operator=(other);
 			return *this;
 		}
 		iterator begin() { return this->c.begin();}
