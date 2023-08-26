@@ -21,7 +21,8 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		BitcoinExchange(std::string database);
-		void printExchangeValues();
+		bool checkInputLine(std::string inputline);
+		void printExchangeValues(std::map<class Date, float> input);
 };
 
 
