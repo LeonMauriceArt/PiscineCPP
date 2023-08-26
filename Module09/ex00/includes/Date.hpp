@@ -10,9 +10,9 @@ class Date
 		unsigned int _day;
 		unsigned int _month;
 		Date();
+	public:
 		Date(const Date &other);
 		Date &operator=(const Date &other);
-	public:
 		Date(std::string date);
 		~Date();
 		unsigned int getYear() const;

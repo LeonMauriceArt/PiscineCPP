@@ -1,4 +1,4 @@
-#include "BitcoinExchange.hpp"
+#include "../includes/BitcoinExchange.hpp"
 #include <cctype>
 #include <cstdlib>
 #include <fstream>
@@ -55,7 +55,7 @@ void BitcoinExchange::getDatabase(std::string database)
 	}
 }
 
-void	BitcoinExchange::printExchangeValues()
+void	BitcoinExchange::printExchangeValues(std::map<class Date, float> input)
 {
 	
 }

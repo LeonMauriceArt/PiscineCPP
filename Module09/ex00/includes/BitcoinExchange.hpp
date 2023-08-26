@@ -13,7 +13,7 @@
 class BitcoinExchange
 {
 	private:
-		std::map<std::string, float> database;
+		std::map<class Date, float> database;
 		void getDatabase(std::string database);
 	public:
 		BitcoinExchange();
