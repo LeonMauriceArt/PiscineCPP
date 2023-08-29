@@ -7,6 +7,11 @@
 #include <fstream>
 #include <string>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"      /* Red */
+#define GREEN   "\033[32m"      /* Green */
+#define YELLOW  "\033[33m"      /* Yellow */
+
 #define DATABASE "data.csv"
 
 class BitcoinExchange
@@ -20,8 +25,9 @@ class BitcoinExchange
 		BitcoinExchange(const BitcoinExchange &other);
 		BitcoinExchange &operator=(const BitcoinExchange &other);
 		BitcoinExchange(std::string database);
-		bool checkInputLine(std::string inputline);
+		void checkInputLine(std::string inputline);
 		void printExchangeValues(std::string filename);
+		void searchInData(unsigned int datevalue, float amount, std::string date);
 };
 
 unsigned int convertDate(std::string date);

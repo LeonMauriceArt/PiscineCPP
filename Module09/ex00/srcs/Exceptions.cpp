@@ -10,6 +10,11 @@ const char *notPositiveNumber::what() const throw()
         return ("Error: not a positive number.");
 }
 
+const char *tooHighNumber::what() const throw()
+{
+        return ("Error: too high amount (between 0 and 1000).");
+}
+
 badInput::badInput(std::string errorline)
 {
         std::string message = "Error: bad input => ";

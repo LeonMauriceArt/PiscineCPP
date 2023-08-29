@@ -16,6 +16,12 @@ class notPositiveNumber: public std::exception
                 virtual const char* what() const throw();
 };
 
+class tooHighNumber: public std::exception
+{
+        public:
+                virtual const char* what() const throw();
+};
+
 class badInput: public std::exception
 {
         private:

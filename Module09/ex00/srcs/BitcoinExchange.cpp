@@ -1,11 +1,10 @@
 #include "../includes/BitcoinExchange.hpp"
+#include "../includes/Exceptions.hpp"
 #include <cctype>
 #include <cstdlib>
 #include <exception>
-#include <fstream>
 #include <sstream>
 #include <string>
-#include "../includes/Exceptions.hpp"
 
 BitcoinExchange::BitcoinExchange()
 {
@@ -75,53 +74,110 @@ void BitcoinExchange::getDatabase(std::string database)
 	}
 }
 
+void	BitcoinExchange::checkInputLine(std::string line)
+{
+	std::string date;
+	std::string::size_type pos = line.find('|');
+	std::string remain;
+	if (pos != std::string::npos)
+	{
+		--pos;
+		date = line.substr(0, pos);
+		if (date.size() != 10)
+		{
+			throw badInput(line);
+		}
+		for (size_t i = 0; i < date.size(); ++i)
+		{
+			if (i == 4 || i == 7)
+			{
+				if (date[i] != '-')
+					throw badInput(line);
+			}
+			else 
+			{
+				if (!std::isdigit(date[i]))
+					throw badInput(line);
+			}
+		}
+		std::string remaining;
+		remaining = line.substr(line.find("|") + 1);
+		if (!remaining.empty() && remaining[0] == ' ')
+		{
+			remaining = remaining.substr(1);
+			float f;
+			std::istringstream iss(remaining);
+			iss >> std::noskipws >> f;
+			if (iss.fail() || !iss.eof())
+				throw badInput(line);
+		}
+		else {
+			throw badInput(line);
+		}
+	}
+	else {
+		throw badInput(line);
+	}
+}
+
+void	BitcoinExchange::searchInData(unsigned int datevalue, float amount, std::string date)
+{
+	if (amount < 0)
+		throw notPositiveNumber();
+	if (amount > 1000)
+		throw tooHighNumber();
+	std::map<unsigned int, float>::iterator iter = database.find(datevalue);
+	if (iter != database.end())
+		std::cout << date << " => " << amount << " = " << database.find(datevalue)->second * amount << std::endl;
+	else 
+	{
+		iter = database.lower_bound(datevalue);
+		if (iter != database.begin())
+		{
+			--iter;
+			std::cout << iter->first << " => " << amount << " = " << iter->second * amount << std::endl;
+		}
+	}
+}
+
 void	BitcoinExchange::printExchangeValues(std::string filename)
 {
 	std::ifstream file;
-	try 
+	file.open(filename.c_str());
+	std::string line;
+	std::string date;
+	std::string amount;
+	unsigned int datevalue;
+	float amountvalue;
+	if (file.is_open())
 	{
-		file.open(filename.c_str());
-		std::map<unsigned int, float> newInput;
-		std::string line;
-		std::string date;
-		unsigned int datevalue;
-		float	value;
-		if (file.is_open())
+		while(file)
 		{
-			while(file)
+			//catching error for each line
+			try 
 			{
-				//catching error for each line
-				try 
+				std::getline(file, line);
+				if (line != "")
 				{
-					std::getline(file, line);
+					checkInputLine(line);
 					std::string::size_type pos = line.find('|');
 					--pos;
-					if (pos != std::string::npos && std::isdigit(line.c_str()[0]))
-					{
-						date = line.substr(0, pos);
-						if (date.size() != 10)
-							throw badInput(line);
-						std::cout << "date = " << date << "$" << std::endl;
-						datevalue = convertDate(date);
-						std::cout << "date value = " << datevalue << std::endl;
-						line = line.substr(line.find(",") + 1);
-						value = static_cast<float>(std::atof(line.c_str()));
-					}
-				} 
-				catch (std::exception &e) 
-				{
-					std::cout << e.what() << std::endl;
+					date = line.substr(0, pos);
+					datevalue = convertDate(date);
+					amount = line.substr(line.find("|") + 1);
+					amountvalue = static_cast<float>(std::atof(amount.c_str()));
+					searchInData(datevalue, amountvalue, date);
 				}
+			} 
+			catch (std::exception &e) 
+			{
+				std::cout << e.what() << std::endl;
 			}
 		}
-		else 
-		{
-			throw cannotOpenFile();
-		}
-	} 
-	catch (std::exception &e) 
+	}
+	else 
 	{
-		std::cout << e.what() << std::endl;
+		throw cannotOpenFile();
 	}
 }
 
