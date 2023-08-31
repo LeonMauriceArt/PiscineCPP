@@ -1,4 +1,4 @@
-NAME        =	easyfind
+NAME        =	RPN
 
 SRCS 		=	 $(shell find -name '*.cpp')
 
