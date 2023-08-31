@@ -1,16 +1,8 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <iostream>
-#include <map>
-#include <algorithm>
-#include <fstream>
-#include <string>
-
-#define RESET   "\033[0m"
-#define RED     "\033[31m"      /* Red */
-#define GREEN   "\033[32m"      /* Green */
-#define YELLOW  "\033[33m"      /* Yellow */
+#include "Headers.hpp"
+#include "Exceptions.hpp"
 
 #define DATABASE "data.csv"
 
@@ -30,6 +22,5 @@ class BitcoinExchange
 		void searchInData(unsigned int datevalue, float amount, std::string date);
 };
 
-unsigned int convertDate(std::string date);
 
 #endif

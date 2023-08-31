@@ -1,8 +1,7 @@
 #include "../includes/BitcoinExchange.hpp"
 #include "../includes/Exceptions.hpp"
+#include "../includes/Date.hpp"
 #include <cctype>
-#include <cstdlib>
-#include <exception>
 #include <sstream>
 #include <string>
 
@@ -31,20 +30,6 @@ BitcoinExchange::BitcoinExchange(std::string database)
 	getDatabase(database);
 }
 
-unsigned int convertDate(std::string date)
-{
-	std::string processedDate;
-	for (size_t i = 0; i < date.size(); ++i)
-	{
-		if (date[i] != '-')
-			processedDate += date[i];
-	}
-	std::istringstream iss(processedDate);
-	unsigned int datevalue = 0;
-	iss >> datevalue;
-	return datevalue;
-}
-
 void BitcoinExchange::getDatabase(std::string database)
 {
 	std::ifstream file;
@@ -62,10 +47,17 @@ void BitcoinExchange::getDatabase(std::string database)
 			if (pos != std::string::npos && std::isdigit(line.c_str()[0]))
 			{
 				date = line.substr(0, pos);
-				datevalue = convertDate(date);
-				line = line.substr(line.find(",") + 1);
-				value = static_cast<float>(std::atof(line.c_str()));
-				this->database.insert(std::pair<unsigned int, float>(datevalue, value));
+				try 
+				{
+					datevalue = Date::convertDate(date);
+					line = line.substr(line.find(",") + 1);
+					value = static_cast<float>(std::atof(line.c_str()));
+					this->database.insert(std::pair<unsigned int, float>(datevalue, value));
+				} 
+				catch (std::exception &e) 
+				{
+					std::cout << e.what() << std::endl;
+				}
 			}
 		}
 	}
@@ -120,6 +112,16 @@ void	BitcoinExchange::checkInputLine(std::string line)
 	}
 }
 
+static std::string intDateToString(unsigned int date)
+{
+	std::stringstream ss;
+	ss << date;
+	std::string returnDate = ss.str();
+	returnDate.insert(4, "-");
+	returnDate.insert(7, "-");
+	return returnDate;
+}
+
 void	BitcoinExchange::searchInData(unsigned int datevalue, float amount, std::string date)
 {
 	if (amount < 0)
@@ -135,8 +137,10 @@ void	BitcoinExchange::searchInData(unsigned int datevalue, float amount, std::st
 		if (iter != database.begin())
 		{
 			--iter;
-			std::cout << iter->first << " => " << amount << " = " << iter->second * amount << std::endl;
+			std::cout << intDateToString(iter->first) << " => " << amount << " = " << iter->second * amount << std::endl;
 		}
+		else 
+			throw noPreviousValue();
 	}
 }
 
@@ -157,13 +161,13 @@ void	BitcoinExchange::printExchangeValues(std::string filename)
 			try 
 			{
 				std::getline(file, line);
-				if (line != "")
+				if (line != "" && std::isdigit(line[0]))
 				{
 					checkInputLine(line);
 					std::string::size_type pos = line.find('|');
 					--pos;
 					date = line.substr(0, pos);
-					datevalue = convertDate(date);
+					datevalue = Date::convertDate(date);
 					amount = line.substr(line.find("|") + 1);
 					amountvalue = static_cast<float>(std::atof(amount.c_str()));
 					searchInData(datevalue, amountvalue, date);

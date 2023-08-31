@@ -1,8 +1,7 @@
 #ifndef EXCEPTIONS_HPP
 #define EXCEPTIONS_HPP
 
-#include <exception>
-#include <iostream>
+#include "Headers.hpp"
 
 class cannotOpenFile: public std::exception
 {
@@ -17,6 +16,18 @@ class notPositiveNumber: public std::exception
 };
 
 class tooHighNumber: public std::exception
+{
+        public:
+                virtual const char* what() const throw();
+};
+
+class invalidDate: public std::exception
+{
+        public:
+                virtual const char* what() const throw();
+};
+
+class noPreviousValue: public std::exception
 {
         public:
                 virtual const char* what() const throw();
