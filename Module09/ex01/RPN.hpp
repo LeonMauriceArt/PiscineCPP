@@ -1,8 +1,11 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <exception>
 #include <iostream>
 #include <stack>
+#include <cstddef>
+#include <algorithm>
 
 class RPN
 {
@@ -11,10 +14,18 @@ class RPN
 		RPN();
 		RPN(const RPN &other);
 		RPN &operator=(const RPN &other);
+		bool isOperator(const char c);
+		bool checkInput(std::string &expression);
+		int	operate(int a, int b, char operatorChar);
 	public:
-		RPN
+		RPN(std::string expression);
 		~RPN();
-		void	reversePolishCalculation(char **av);
+		void	reversePolishCalculation(std::string expression);
+		class badExpressionException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 };
 
 

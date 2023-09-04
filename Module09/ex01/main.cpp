@@ -14,10 +14,13 @@ int main(int ac, char **av)
 		return (1);
 	}
 	std::string expression(av[1]);
-	if (!checkInput(expression))
+	try 
 	{
-		std::cout << "Error: bad input." << std::endl;
-		return (1);
+		RPN rpn(expression);
+	} 
+	catch (std::exception &e) 
+	{
+		std::cout << e.what() << std::endl;
 	}
 	return (0);
 }
