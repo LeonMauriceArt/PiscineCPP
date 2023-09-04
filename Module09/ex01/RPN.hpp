@@ -6,6 +6,10 @@
 #include <stack>
 #include <cstddef>
 #include <algorithm>
+#include <cctype>
+#include <cstdlib>
+#include <sstream>
+#include <climits>
 
 class RPN
 {
@@ -26,7 +30,11 @@ class RPN
 			public:
 				virtual const char* what() const throw();
 		};
+		class resultOverflowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 };
-
 
 #endif

@@ -1,8 +1,5 @@
 #include "RPN.hpp"
-#include <cctype>
-#include <cstddef>
-#include <cstdlib>
-#include <sstream>
+#include <limits>
 
 RPN::RPN()
 {
@@ -28,6 +25,11 @@ RPN::~RPN()
 const char* RPN::badExpressionException::what() const throw()
 {
 	return ("Error: bad expression input.");
+}
+
+const char* RPN::resultOverflowException::what() const throw()
+{
+	return ("Error: result is int overflowing.");
 }
 
 bool RPN::isOperator(const char c)
@@ -67,16 +69,39 @@ RPN::RPN(std::string expression)
 
 int RPN::operate(int a, int b, char operatorCase)
 {
+	long long result = 0;
 	switch (operatorCase) 
 	{
 		case ('+'):
-			return (a + b);
+		{
+			result = a + b;
+			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
+				throw resultOverflowException();
+			return static_cast<int>(result);
+		}
 		case ('-'):
-			return (a - b);
+		{
+			result = a - b;
+			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
+				throw resultOverflowException();
+			return static_cast<int>(result);
+		}
 		case ('/'):
-			return (a / b);
+		{
+			result = a / b;
+			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
+				throw resultOverflowException();
+			return static_cast<int>(result);
+		}
 		case ('*'):
-			return (a * b);
+		{
+			result = a * b;
+			std::cout << "long double result of " << a << " * " << b << " is " << result << std::endl;
+			std::cout << "max is " << std::numeric_limits<int>::max() << std::endl;
+			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
+				throw resultOverflowException();
+			return static_cast<int>(result);
+		}
 		default:
 			throw badExpressionException();
 	}
