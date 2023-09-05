@@ -1,4 +1,4 @@
-NAME        =	easyfind
+NAME        =	PmergeMe
 
 SRCS 		=	 $(shell find -name '*.cpp')
 
@@ -6,7 +6,7 @@ OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
 CC          =    c++
 
-CFLAGS      =    -Wall -Werror -Wextra -Wno-unused -std=c++98
+CFLAGS      =    -Wall -Werror -Wextra -std=c++98
 
 RM          =    rm -rf
 

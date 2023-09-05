@@ -8,7 +8,7 @@ RPN::RPN()
 
 RPN::RPN(const RPN &other)
 {
-	(void)other;
+	numStack = other.numStack;
 }
 
 RPN &RPN::operator=(const RPN &other)
@@ -69,35 +69,33 @@ RPN::RPN(std::string expression)
 
 int RPN::operate(int a, int b, char operatorCase)
 {
-	long long result = 0;
+	long double result = 0;
 	switch (operatorCase) 
 	{
 		case ('+'):
 		{
-			result = a + b;
+			result = static_cast<long double>(a) + static_cast<long double>(b);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);
 		}
 		case ('-'):
 		{
-			result = a - b;
+			result = static_cast<long double>(a) - static_cast<long double>(b);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);
 		}
 		case ('/'):
 		{
-			result = a / b;
+			result = static_cast<long double>(a) / static_cast<long double>(b);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);
 		}
 		case ('*'):
 		{
-			result = a * b;
-			std::cout << "long double result of " << a << " * " << b << " is " << result << std::endl;
-			std::cout << "max is " << std::numeric_limits<int>::max() << std::endl;
+			result = static_cast<long double>(a) * static_cast<long double>(b);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);

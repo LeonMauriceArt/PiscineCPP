@@ -9,7 +9,6 @@
 #include <cctype>
 #include <cstdlib>
 #include <sstream>
-#include <climits>
 
 class RPN
 {
