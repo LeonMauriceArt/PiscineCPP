@@ -1,6 +1,7 @@
 #include "./includes/BitcoinExchange.hpp"
 #include "./includes/Exceptions.hpp"
 #include "./includes/Date.hpp"
+#include <exception>
 
 int main(int ac, char **av)
 {

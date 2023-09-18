@@ -27,13 +27,47 @@ void PmergeMe::checkInput(char **arguments)
 	return;
 }
 
+void PmergeMe::getInput(char **arguments)
+{
+	(void)arguments;
+}
+
 PmergeMe::PmergeMe(char **arguments)
 {
-	checkInput(++arguments); //++arguments to skip the first arg, the program name
+	checkInput(arguments);
+	getInput(arguments);
 	logResult();
 }
 
 void PmergeMe::logResult()
 {
+	std::cout << "Before: " << _before << std::endl;
+	std::cout << "After: " << _after << std::endl;
 
+}
+
+const char* PmergeMe::alreadySortedException::what() const throw()
+{
+	return ("Error: the number sequence is already sorted.");
+}
+
+const char* PmergeMe::negativeNumberException::what() const throw()
+{
+	return ("Error: the number sequence is already sorted.");
+}
+
+PmergeMe::badInputException::badInputException(std::string errorInput)
+{
+        std::string message = "Error: bad input => ";
+        message.append(errorInput);
+        errorMessage = message;
+}
+
+PmergeMe::badInputException::~badInputException() throw() 
+{
+}
+
+const char *PmergeMe::badInputException::what() const throw()
+{
+        return (errorMessage.c_str());
 }

@@ -3,6 +3,7 @@
 #include "../includes/Date.hpp"
 #include <cctype>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 
 BitcoinExchange::BitcoinExchange()
