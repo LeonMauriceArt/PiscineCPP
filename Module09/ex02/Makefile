@@ -4,7 +4,7 @@ SRCS 		=	 $(shell find -name '*.cpp')
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
-CC          =    c++
+CC          =    g++
 
 CFLAGS      =    -Wall -Werror -Wextra -std=c++98
 
@@ -12,7 +12,7 @@ RM          =    rm -rf
 
 objs/%.o:	%.cpp Makefile
 	@mkdir -p $(dir $@)             
-	$(CC) -g3 ${CFLAGS} -c $< -o $@
+	$(CC) ${CFLAGS} -c $< -o $@
 
 all:	${NAME}
 

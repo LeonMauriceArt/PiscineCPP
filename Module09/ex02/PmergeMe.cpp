@@ -1,10 +1,6 @@
 #include "PmergeMe.hpp"
-#include <bits/types/time_t.h>
-#include <cctype>
 #include <cstddef>
-#include <cstdlib>
 #include <ctime>
-#include <limits>
 #include <vector>
 
 PmergeMe::PmergeMe()
@@ -39,66 +35,61 @@ void PmergeMe::checkInput(char **arguments)
 		if (value > std::numeric_limits<unsigned int>::max())
 			throw badInputException();
 	}
-	std::cout << "Good input !" << std::endl;
-	return;
 }
 
-void PmergeMe::getInput(char **arguments)
+void PmergeMe::fillVector(char **arguments)
+{
+	unsigned int element;
+	for (size_t i = 0; arguments[i]; ++i)
+	{
+		element = atof(arguments[i]);
+		_sequenceVector.push_back(element);
+	}
+}
+
+void printVector(unIntVector vector)
+{
+	for (unIntVector::iterator iter = vector.begin(); iter != vector.end(); ++iter)
+	{
+		std::cout << *iter << " ";
+	}
+	std::cout << std::endl;
+}
+
+void PmergeMe::fillDeque(char **arguments)
 {
 	(void)arguments;
 }
 
 PmergeMe::PmergeMe(char **arguments)
 {
-<<<<<<< HEAD
-	checkInput(++arguments); //++arguments to skip the first arg, the program name
-	//getInput(++arguments);
-	time_t VectorSortTime = 0;
-	time_t DequeSortTime = 0;
-	mergeInsertionSort(this->sequenceVector);
-	mergeInsertionSort(this->sequenceDeque);
-	logResult(VectorSortTime, DequeSortTime, sequenceVector);
-=======
 	checkInput(arguments);
-	getInput(arguments);
-	logResult();
->>>>>>> ae364228e7ee7c95e8175d4b255305fd1caab644
+	double vectorTime;
+	double dequeTime;
+	clock_t start;
+	start = clock();
+	fillVector(arguments);
+	vectorMergeInsertion(_sequenceVector);
+	clock_t end = clock();
+	vectorTime = ((double)(end - start)) / CLOCKS_PER_SEC;
+	start = clock();
+	fillDeque(arguments);
+	dequeMergeInsertion(_sequenceDeque);
+	end = clock();
+	dequeTime = ((double)(end - start)) / CLOCKS_PER_SEC;
+	logResult(vectorTime, dequeTime, _sequenceVector, arguments);
 }
 
-void PmergeMe::logResult(time_t vectorTime, time_t dequeTime, std::vector<unsigned int> sortedVector)
+void PmergeMe::logResult(double vectorTime, double dequeTime, unIntVector sortedVector, char **args)
 {
-<<<<<<< HEAD
+	std::cout << "Before : ";
+	for (size_t i = 0; args[i]; ++i)
+	{
+		std::cout << args[i] << " ";
+	}
+	std::cout << std::endl;
+	std::cout << "After : ";
+	printVector(sortedVector);
 	std::cout << vectorTime << " and " << dequeTime << std::endl;
 	(void)sortedVector;
-=======
-	std::cout << "Before: " << _before << std::endl;
-	std::cout << "After: " << _after << std::endl;
-
-}
-
-const char* PmergeMe::alreadySortedException::what() const throw()
-{
-	return ("Error: the number sequence is already sorted.");
-}
-
-const char* PmergeMe::negativeNumberException::what() const throw()
-{
-	return ("Error: the number sequence is already sorted.");
-}
-
-PmergeMe::badInputException::badInputException(std::string errorInput)
-{
-        std::string message = "Error: bad input => ";
-        message.append(errorInput);
-        errorMessage = message;
-}
-
-PmergeMe::badInputException::~badInputException() throw() 
-{
-}
-
-const char *PmergeMe::badInputException::what() const throw()
-{
-        return (errorMessage.c_str());
->>>>>>> ae364228e7ee7c95e8175d4b255305fd1caab644
 }
