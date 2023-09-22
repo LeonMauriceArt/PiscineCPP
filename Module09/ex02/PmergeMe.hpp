@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
+#include <bits/types/clock_t.h>
 #include <deque>
 #include <vector>
 #include <iostream>
@@ -26,10 +27,8 @@ class PmergeMe
 		PmergeMe &operator=(const PmergeMe &other);
 		void fillVector(char **args);
 		void fillDeque(char **args);
-		void vectorInsertionSort(unIntVector vector);
-		void vectorMergeInsertion(unIntVector vector);
-		void dequeInsertionSort(unIntDeque deque);
-		void dequeMergeInsertion(unIntDeque deque);
+		void vectorMergeInsertion(unIntVector &vector);
+		void dequeMergeInsertion(unIntDeque &deque);
 		void checkInput(char **arguments);
 		void getInput(char **arguments);
 		void logResult(double vectorTime, double dequeTime, unIntVector sequenceVector, char **args);
@@ -37,6 +36,11 @@ class PmergeMe
 		PmergeMe(char **arguments);
 		~PmergeMe();
 		class badInputException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+		class duplicateException : public std::exception
 		{
 			public:
 				virtual const char* what() const throw();

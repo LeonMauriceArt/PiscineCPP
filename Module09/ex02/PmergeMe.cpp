@@ -1,4 +1,6 @@
 #include "PmergeMe.hpp"
+#include <algorithm>
+#include <bits/types/clock_t.h>
 #include <cstddef>
 #include <ctime>
 #include <vector>
@@ -43,7 +45,21 @@ void PmergeMe::fillVector(char **arguments)
 	for (size_t i = 0; arguments[i]; ++i)
 	{
 		element = atof(arguments[i]);
+		if (std::find(_sequenceVector.begin(), _sequenceVector.end(), element) != _sequenceVector.end())
+			throw duplicateException();
 		_sequenceVector.push_back(element);
+	}
+}
+
+void PmergeMe::fillDeque(char **arguments)
+{
+	unsigned int element;
+	for (size_t i = 0; arguments[i]; ++i)
+	{
+		element = atof(arguments[i]);
+		if (std::find(_sequenceDeque.begin(), _sequenceDeque.end(), element) != _sequenceDeque.end())
+			throw duplicateException();
+		_sequenceDeque.push_back(element);
 	}
 }
 
@@ -56,28 +72,30 @@ void printVector(unIntVector vector)
 	std::cout << std::endl;
 }
 
-void PmergeMe::fillDeque(char **arguments)
-{
-	(void)arguments;
-}
-
 PmergeMe::PmergeMe(char **arguments)
 {
 	checkInput(arguments);
-	double vectorTime;
-	double dequeTime;
-	clock_t start;
+	clock_t start, end;
+	double vectorExecTime, dequeExecTime;
+	vectorExecTime = 0.0;
+	dequeExecTime = 0.0;
+	
+	//VECTOR EXEC
 	start = clock();
 	fillVector(arguments);
 	vectorMergeInsertion(_sequenceVector);
-	clock_t end = clock();
-	vectorTime = ((double)(end - start)) / CLOCKS_PER_SEC;
+	end = clock();
+	vectorExecTime += ((double) (end - start)) / CLOCKS_PER_SEC;
+	
+	//DEQUE EXEC
 	start = clock();
 	fillDeque(arguments);
 	dequeMergeInsertion(_sequenceDeque);
 	end = clock();
-	dequeTime = ((double)(end - start)) / CLOCKS_PER_SEC;
-	logResult(vectorTime, dequeTime, _sequenceVector, arguments);
+	dequeExecTime += ((double) (end - start)) / CLOCKS_PER_SEC;
+
+	//DISPLAYING RESULTS
+	logResult(vectorExecTime, dequeExecTime, _sequenceVector, arguments);
 }
 
 void PmergeMe::logResult(double vectorTime, double dequeTime, unIntVector sortedVector, char **args)
@@ -90,6 +108,6 @@ void PmergeMe::logResult(double vectorTime, double dequeTime, unIntVector sorted
 	std::cout << std::endl;
 	std::cout << "After : ";
 	printVector(sortedVector);
-	std::cout << vectorTime << " and " << dequeTime << std::endl;
-	(void)sortedVector;
+	std::cout << "Time to process a range of " << sortedVector.size() << " elements with std::vector : " << vectorTime * 1000 << " milliseconds"<< std::endl;
+	std::cout << "Time to process a range of " << sortedVector.size() << " elements with std::deque : " << dequeTime * 1000 << " milliseconds" << std::endl;
 }
