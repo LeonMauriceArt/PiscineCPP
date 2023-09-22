@@ -9,3 +9,8 @@ const char *PmergeMe::duplicateException::what() const throw()
 {
 	return ("Error: your input has a duplicate number.");
 }
+
+const char *PmergeMe::alreadySortedException::what() const throw()
+{
+	return ("Error: the sequence provided is already sorted.");
+}

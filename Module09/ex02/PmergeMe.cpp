@@ -1,9 +1,4 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
-#include <bits/types/clock_t.h>
-#include <cstddef>
-#include <ctime>
-#include <vector>
 
 PmergeMe::PmergeMe()
 {
@@ -72,9 +67,29 @@ void printVector(unIntVector vector)
 	std::cout << std::endl;
 }
 
+bool isSorted(char **arguments)
+{
+	unsigned int element;
+	unIntVector test;
+	for (size_t i = 0; arguments[i]; ++i)
+	{
+		element = atof(arguments[i]);
+		test.push_back(element);
+	}
+	unIntVector::const_iterator it;
+	for (it = test.begin(); it != test.end() - 1; ++it)
+	{
+		if (*it > *(it + 1))
+			return false;
+	}
+	return true;
+}
+
 PmergeMe::PmergeMe(char **arguments)
 {
 	checkInput(arguments);
+	if (isSorted(arguments))
+		throw alreadySortedException();
 	clock_t start, end;
 	double vectorExecTime, dequeExecTime;
 	vectorExecTime = 0.0;
