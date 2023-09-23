@@ -17,7 +17,7 @@ objs/%.o:	%.cpp Makefile
 all:	${NAME}
 
 ${NAME}:	${OBJS}           
-	$(CC) -g3 ${CFLAGS} -o $(NAME) ${OBJS}
+	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:
 	${RM} objs/

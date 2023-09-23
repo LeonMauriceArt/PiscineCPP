@@ -133,7 +133,7 @@ void dequeMerge(unIntDeque &deque, int left, int mid, int right)
     }
 }
 
-void dequeAlgo(unIntDeque &deque, int left, int right, unsigned int threshold) 
+void dequeAlgo(unIntDeque &deque, int left, int right, int threshold) 
 {
     if (left < right) 
 	{

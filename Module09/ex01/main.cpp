@@ -1,11 +1,5 @@
 #include "RPN.hpp"
 
-bool	checkInput(std::string expression)
-{
-	(void)expression;
-	return (true);
-}
-
 int main(int ac, char **av)
 {
 	if (ac != 2)
