@@ -17,8 +17,6 @@ class PmergeMe
 	private:
 		std::vector<unsigned int> _sequenceVector;
 		std::deque<unsigned int> _sequenceDeque;
-		std::string _before;
-		std::string _after;
 		PmergeMe();
 		PmergeMe(const PmergeMe &other);
 		PmergeMe &operator=(const PmergeMe &other);

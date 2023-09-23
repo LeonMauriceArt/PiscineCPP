@@ -67,6 +67,15 @@ void printVector(unIntVector vector)
 	std::cout << std::endl;
 }
 
+void printDeque(unIntDeque deque)
+{
+	for (unIntDeque::iterator iter = deque.begin(); iter != deque.end(); ++iter)
+	{
+		std::cout << *iter << " ";
+	}
+	std::cout << std::endl;
+}
+
 bool isSorted(char **arguments)
 {
 	unsigned int element;
