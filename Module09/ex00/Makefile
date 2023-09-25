@@ -1,6 +1,14 @@
 NAME        =	btc
 
-SRCS 		=	 $(shell find -name '*.cpp')
+SRCS 		=	 ./srcs/BitcoinExchange.cpp \
+				 ./srcs/Date.cpp \
+				 ./srcs/Exceptions.cpp \
+				 main.cpp
+
+INCLUDES	=	 ./includes/BitcoinExchange.hpp \
+				 ./includes/Date.hpp \
+				 ./includes/Exceptions.hpp \
+				 ./includes/Headers.hpp
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
@@ -10,13 +18,13 @@ CFLAGS      =    -Wall -Werror -Wextra -std=c++98
 
 RM          =    rm -rf
 
-objs/%.o:	%.cpp Makefile
+objs/%.o:	%.cpp ./includes/* Makefile
 	@mkdir -p $(dir $@)             
 	$(CC) ${CFLAGS} -c $< -o $@
 
 all:	${NAME}
 
-${NAME}:	${OBJS}           
+${NAME}:	${OBJS} ${INCLUDES}         
 	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:

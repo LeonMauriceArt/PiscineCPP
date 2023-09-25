@@ -27,6 +27,11 @@ const char* RPN::badExpressionException::what() const throw()
 	return ("Error: bad expression input.");
 }
 
+const char* RPN::divideZeroException::what() const throw()
+{
+	return ("Error: cannot divide by zero.");
+}
+
 const char* RPN::resultOverflowException::what() const throw()
 {
 	return ("Error: result is int overflowing.");
@@ -81,14 +86,16 @@ int RPN::operate(int a, int b, char operatorCase)
 		}
 		case ('-'):
 		{
-			result = static_cast<long double>(a) - static_cast<long double>(b);
+			result = static_cast<long double>(b) - static_cast<long double>(a);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);
 		}
 		case ('/'):
 		{
-			result = static_cast<long double>(a) / static_cast<long double>(b);
+			if (a == 0)
+				throw divideZeroException();
+			result = static_cast<long double>(b) / static_cast<long double>(a);
 			if (result > std::numeric_limits<int>::max() || result < std::numeric_limits<int>::min())
 				throw resultOverflowException();
 			return static_cast<int>(result);

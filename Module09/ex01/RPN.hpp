@@ -29,6 +29,11 @@ class RPN
 			public:
 				virtual const char* what() const throw();
 		};
+		class divideZeroException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 		class resultOverflowException : public std::exception
 		{
 			public:

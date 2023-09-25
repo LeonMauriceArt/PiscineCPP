@@ -1,6 +1,9 @@
 NAME        =	RPN
 
-SRCS 		=	 $(shell find -name '*.cpp')
+SRCS 		=	 RPN.cpp \
+				 main.cpp
+
+INCLUDES	=	 RPN.hpp
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
@@ -16,7 +19,7 @@ objs/%.o:	%.cpp Makefile
 
 all:	${NAME}
 
-${NAME}:	${OBJS}           
+${NAME}:	${OBJS} ${INCLUDES}        
 	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:

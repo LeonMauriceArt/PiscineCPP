@@ -57,7 +57,6 @@ void BitcoinExchange::getDatabase(std::string database)
 				} 
 				catch (std::exception &e) 
 				{
-					std::cout << e.what() << std::endl;
 				}
 			}
 		}
