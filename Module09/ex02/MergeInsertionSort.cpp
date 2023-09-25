@@ -20,19 +20,19 @@ void vectorInsertionSort(std::vector<unsigned int>& vector, int left, int right)
 
 void vectorMerge(unIntVector &vector, int left, int mid, int right) 
 {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int leftSize = mid - left + 1;
+    int rightSize = right - mid;
 
-    std::vector<unsigned int> L(n1);
-    std::vector<unsigned int> R(n2);
+    std::vector<unsigned int> L(leftSize);
+    std::vector<unsigned int> R(rightSize);
 
-    for (int i = 0; i < n1; i++)
+    for (int i = 0; i < leftSize; i++)
         L[i] = vector[left + i];
-    for (int i = 0; i < n2; i++)
+    for (int i = 0; i < rightSize; i++)
         R[i] = vector[mid + 1 + i];
 
     int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
+    while (i < leftSize && j < rightSize) {
         if (L[i] <= R[j]) {
             vector[k] = L[i];
             i++;
@@ -42,12 +42,12 @@ void vectorMerge(unIntVector &vector, int left, int mid, int right)
         }
         k++;
     }
-    while (i < n1) {
+    while (i < leftSize) {
         vector[k] = L[i];
         i++;
         k++;
     }
-    while (j < n2) {
+    while (j < rightSize) {
         vector[k] = R[j];
         j++;
         k++;
@@ -99,19 +99,19 @@ void dequeInsertionSort(unIntDeque &deque, int left, int right)
 
 void dequeMerge(unIntDeque &deque, int left, int mid, int right) 
 {
-    int n1 = mid - left + 1;
-    int n2 = right - mid;
+    int leftSize = mid - left + 1;
+    int rightSize = right - mid;
 
-    std::vector<unsigned int> L(n1);
-    std::vector<unsigned int> R(n2);
+    std::vector<unsigned int> L(leftSize);
+    std::vector<unsigned int> R(rightSize);
 
-    for (int i = 0; i < n1; i++)
+    for (int i = 0; i < leftSize; i++)
         L[i] = deque[left + i];
-    for (int i = 0; i < n2; i++)
+    for (int i = 0; i < rightSize; i++)
         R[i] = deque[mid + 1 + i];
 
     int i = 0, j = 0, k = left;
-    while (i < n1 && j < n2) {
+    while (i < leftSize && j < rightSize) {
         if (L[i] <= R[j]) {
             deque[k] = L[i];
             i++;
@@ -121,12 +121,12 @@ void dequeMerge(unIntDeque &deque, int left, int mid, int right)
         }
         k++;
     }
-    while (i < n1) {
+    while (i < leftSize) {
         deque[k] = L[i];
         i++;
         k++;
     }
-    while (j < n2) {
+    while (j < rightSize) {
         deque[k] = R[j];
         j++;
         k++;

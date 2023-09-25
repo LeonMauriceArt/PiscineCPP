@@ -1,6 +1,11 @@
 NAME        =	PmergeMe
 
-SRCS 		=	 $(shell find -name '*.cpp')
+SRCS 		=	PmergeMe.cpp \
+				Exceptions.cpp \
+				MergeInsertionSort.cpp \
+				main.cpp
+
+INCLUDES	=	PmergeMe.hpp
 
 OBJS        =    ${addprefix objs/, ${SRCS:.cpp=.o}}
 
@@ -16,7 +21,7 @@ objs/%.o:	%.cpp Makefile
 
 all:	${NAME}
 
-${NAME}:	${OBJS}           
+${NAME}:	${OBJS} ${INCLUDES}    
 	$(CC) ${CFLAGS} -o $(NAME) ${OBJS}
 
 clean:
